@@ -120,6 +120,22 @@
   text-decoration: none;
   color: inherit;
 }
+        /* Feature buttons */
+.feature button {
+  background-color: #4CAF50; /* green background */
+  color: white;              /* white text */
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feature button:hover {
+  background-color: #45a049; /* darker green on hover */
+}
+        
     </style>
 </head>
 <body>
@@ -130,27 +146,23 @@
         </header>
 
         <!-- Features + Mood Tracker side by side -->
-        <div class="features-section">
-            <div class="features">
-                <div class="feature">
-                  <a href="story.html">
-                    <button>📝Share Your Story</button>
-                  </a>
-                </div>
-
-                <div class="feature">
-                  <a href="articles.html">
-                    <button>📚Explore Articles</button>
-                  </a>
-                </div>
-                
-                <div class="feature">
-                  <a href="community.html">
-                    <button>🫂Join Community</button>
-                  </a>
-                </div>
-            </div>
-
+<div class="features-section">
+  <div class="features">
+    
+    <div class="feature">
+      <button onclick="window.location.href='story.html'">📝Share Your Story</button>
+    </div>
+    
+    <div class="feature">
+      <button onclick="window.location.href='articles.html'">📚Explore Articles</button>
+    </div>
+    
+    <div class="feature">
+      <button onclick="window.location.href='community.html'">🫂Join Community</button>
+    </div>
+    
+  </div>
+</div>
 
             <div class="mood-tracker">
                 <h3>Track Your Mood</h3>
