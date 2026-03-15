@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Post | Connect Space</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .logo {
+      width: 40px;
+      height: 40px;
+      background-color: #4a90e2;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    .back-btn {
+      background: none;
+      border: none;
+      color: #4a90e2;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: auto;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 16px;
+      resize: none;
+      margin-bottom: 15px;
+    }
+    .attachment-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .attachment-btn {
+      background: #f0f8ff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .attachment-btn:hover { background: #e6f7ff; }
+    .post-btn {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    .post-btn:hover { background-color: #3a7bc8; }
+    .post-btn.anonymous { background-color: #777; }
+    .post-btn.anonymous:hover { background-color: #555; }
+    .preview-area {
+      margin-top: 20px;
+      border: 1px dashed #ddd;
+      border-radius: 8px;
+      padding: 10px;
+      min-height: 100px;
+      display: none;
+    }
+    .feed { margin-top: 30px; }
+    .post {
+      background:white;
+      padding:15px;
+      margin-bottom:15px;
+      border-radius:8px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .meta {
+      font-size:12px;
+      color:#777;
+      margin-top:5px;
+    }
+    .delete-btn {
+      background:#ff4d4d;
+      color:white;
+      border:none;
+      padding:5px 10px;
+      border-radius:5px;
+      cursor:pointer;
+      font-size:12px;
+      position: absolute;
+      top:10px;
+      right:10px;
+    }
+    .delete-btn:hover { background:#cc0000; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="post-header">
+      <button class="back-btn" onclick="history.back()">← Back</button>
+      <div class="logo">CS</div>
+    </div>
+
+    <!-- Post form -->
+    <textarea id="postText" placeholder="What's on your mind?"></textarea>
+
+    <div class="attachment-options">
+      <button class="attachment-btn" onclick="document.getElementById('photo-input').click()">📷 Photo</button>
+      <button class="attachment-btn" onclick="document.getElementById('video-input').click()">▶️ Video</button>
+      <button class="attachment-btn">😊 Feeling/Activity</button>
+      <input type="file" id="photo-input" accept="image/*" style="display:none">
+      <input type="file" id="video-input" accept="video/*" style="display:none">
+    </div>
+
+    <div class="preview-area" id="preview"></div>
+
+    <button class="post-btn anonymous" onclick="submitPost(true)">Post Anonymously</button>
+    <button class="post-btn" onclick="submitPost(false)">Post</button>
+
+    <!-- Feed -->
+    <div class="feed" id="feed"></div>
+  </div>
+
+  <script>
+    const photoInput = document.getElementById('photo-input');
+    const videoInput = document.getElementById('video-input');
+    const previewArea = document.getElementById('preview');
+    const feed = document.getElementById('feed');
+
+    // Preview photo
+    photoInput.addEventListener('change', function(e) {
+      previewArea.style.display = 'block';
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          previewArea.innerHTML = `<img src="${event.target.result}" style="max-width:100%; border-radius:5px;">`;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Preview video
+    videoInput.addEventListener('change', function(e) {
+      previewArea.style.display = 'block';
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          previewArea.innerHTML = `<video controls style="max-width:100%;"><source src="${event.target.result}"></video>`;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Submit post
+    function submitPost(isAnonymous) {
+      const text = document.getElementById('postText').value.trim();
+      if (!text && previewArea.style.display === 'none') {
+        alert("Please write something or attach a file before posting!");
+        return;
+      }
+
+      const post = {
+        id: Date.now(),
+        content: text,
+        anonymous: isAnonymous,
+        timestamp: new Date().toLocaleString(),
+        attachment: previewArea.innerHTML
+      };
+
+      let posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
+      posts.unshift(post);
+      localStorage.setItem("connectPosts", JSON.stringify(posts));
+
+      // Clear form
+      document.getElementById('postText').value = '';
+      previewArea.style.display = 'none';
+      previewArea.innerHTML = '';
+      photoInput.value = '';
+      videoInput.value = '';
+
+      renderFeed();
+    }
+
+    // Delete post
+    function deletePost(id) {
+      let posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
+      posts = posts.filter(post => post.id !== id);
+      localStorage.setItem("connectPosts", JSON.stringify(posts));
+      renderFeed();
+    }
+
+    // Render feed
+    function renderFeed() {
+      feed.innerHTML = '';
+      const posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
+      if (posts.length === 0) {
+        feed.innerHTML = "<p>No posts yet. Be the first to share!</p>";
+      } else {
+        posts.forEach(post => {
+          const div = document.createElement("div");
+          div.className = "post";
+          div.innerHTML = `
+            <button class="delete-btn" onclick="deletePost(${post.id})">Delete</button>
+            <p><strong>${post.anonymous ? "Anonymous" : "You"}:</strong> ${post.content}</p>
+            ${post.attachment || ""}
+            <div class="meta">${post.timestamp}</div>
+          `;
+          feed.appendChild(div);
+        });
+      }
+    }
+
+    // Load feed on page load
+    renderFeed();
+  </script>
+</body>
+</html>
