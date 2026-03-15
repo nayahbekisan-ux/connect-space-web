@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Community - Wellness Hub</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #e6f7ff;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        h1 {
+            color: #2a6496;
+            font-size: 2em;
+        }
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .section {
+            margin-bottom: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #2a6496;
+        }
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3a7bc8;
+        }
+        .calendar-view {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .calendar-view th, .calendar-view td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .calendar-view th {
+            background-color: #e6f7ff;
+        }
+        .event-day {
+            background-color: #f0f8ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <button class="back-btn" onclick="location.href='index.html'">← Back</button>
+            <h1>Join Our Community</h1>
+            <p>Connect with like-minded individuals</p>
+        </header>
+
+        <div class="section">
+            <h2>Choose Your Community</h2>
+            <div class="card-grid">
+                <div class="card" onclick="location.href='fitness-chat.html'">
+                    <h3>Fitness</h3>
+                    <p>Workout tips and motivation</p>
+                </div>
+                <div class="card" onclick="location.href='mindfulness-chat.html'">
+                    <h3>Mindfulness</h3>
+                    <p>Meditation and stress relief</p>
+                </div>
+                <div class="card" onclick="location.href='nutrition-chat.html'">
+                    <h3>Nutrition</h3>
+                    <p>Healthy eating discussions</p>
+                </div>
+                <div class="card" onclick="location.href='sleep-chat.html'">
+                    <h3>Sleep</h3>
+                    <p>Better sleep techniques</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Upcoming Wellness Events</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Fun Run 5K</h3>
+                    <p>Sat, June 10 • 9:00 AM</p>
+                    <p>Central Park</p>
+                    <button onclick="location.href='rsvp-run.html'">RSVP</button>
+                </div>
+                <div class="card">
+                    <h3>Mindful Meditation</h3>
+                    <p>Tue, June 13 • 7:00 PM</p>
+                    <p>Online</p>
+                    <button onclick="location.href='rsvp-meditation.html'">Join</button>
+                </div>
+                <div class="card">
+                    <h3>Nutrition Workshop</h3>
+                    <p>Thu, June 15 • 6:30 PM</p>
+                    <p>Community Center</p>
+                    <button onclick="location.href='rsvp-nutrition.html'">RSVP</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Community Calendar</h2>
+            <table class="calendar-view">
+                <tr>
+                    <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                </tr>
+                <tr>
+                    <td>4</td><td>5</td><td>6</td><td>7</td>
+                    <td class="event-day">8 <div style="font-size:0.7em;">Yoga Class</div></td>
+                    <td>9</td>
+                    <td class="event-day">10 <div style="font-size:0.7em;">Fun Run</div></td>
+                </tr>
+                <tr>
+                    <td>11</td><td>12</td>
+                    <td class="event-day">13 <div style="font-size:0.7em;">Meditation</div></td>
+                    <td>14</td>
+                    <td class="event-day">15 <div style="font-size:0.7em;">Workshop</div></td>
+                    <td>16</td><td>17</td>
+                </tr>
+            </table>
+        </div>
+
+
+    <script>
+        // Simple hover effect
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseover', function() {
+                this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+            });
+            card.addEventListener('mouseout', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
