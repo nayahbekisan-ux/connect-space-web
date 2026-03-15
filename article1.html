@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article - Connect Space</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .article-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .article-title {
+            color: #2a6496;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        .article-author {
+            color: #5a8bb5;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .article-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .article-content {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #3a7bc8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="article-header">
+            <h1 class="article-title">Eggs Crack the Myth</h1>
+            <p class="article-author">By Dr. Emily Chen</p>
+            <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Mindfulness meditation" class="article-image">
+        </div>
+
+        <div class="article-content">
+            <p>We hear so many things about food every day — “carbs are bad,” “fat makes you fat,” “gluten is evil.” It’s no wonder people get confused! The truth is, a lot of these ideas are myths that have been passed around for years without much science behind them. Let’s bust some of the biggest ones so you can enjoy your meals without the guilt.</p>
+            
+            <p>Carbs aren’t the enemy. Bread, rice, and pasta often get blamed for weight gain, but carbs themselves don’t make you fat. What matters is how much you eat overall. Whole grains, fruits, and veggies are full of fiber and energy your body needs. So instead of cutting carbs, choose smarter ones and keep portions balanced.</p>
+            
+            <p>Healthy eating doesn’t have to break the bank. Sure, fancy “superfoods” can be pricey, but everyday staples like beans, frozen veggies, and oats are cheap and packed with nutrients. With a little planning, eating well can actually save you money.</p>
+            
+            <p>Gluten isn’t evil for everyone. Unless you have celiac disease or a real gluten sensitivity, there’s no reason to avoid it. Whole‑wheat bread and pasta are great sources of fiber and can be part of a healthy diet.</p>
+            
+            <p>Fat‑free doesn’t mean healthy. When companies remove fat, they often add sugar to make food taste better. Your body actually needs healthy fats — like those from avocados, nuts, and olive oil — to keep your brain and heart happy.</p>
+            
+            <p>Eggs aren’t villains. For years, eggs were blamed for raising cholesterol, but new research shows they’re not nearly as bad as once thought. In fact, eggs are full of protein and vitamins. Enjoy them in moderation, and you’re good.</p>
+
+            <p>Food myths can make eating feel stressful, but the truth is simple: balance is better than extremes. No single food is going to ruin your health, and no single “superfood” will save it. Stick to a mix of whole foods — fruits, veggies, grains, proteins, and healthy fats — and you’ll be way ahead of the myth‑busters.<p>
+        </div>
+
+        <a href="index.html" class="back-button">← Back to Home</a>
+    </div>
+
+    <script>
+        // Simple hover effect for the back button
+        document.querySelector('.back-button').addEventListener('mouseover', function() {
+            this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+        });
+        document.querySelector('.back-button').addEventListener('mouseout', function() {
+            this.style.boxShadow = 'none';
+        });
+    </script>
+</body>
+</html>
