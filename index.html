@@ -1,254 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connect Space - Your Wellness Hub</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f8ff;
-      color: #333;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      padding: 30px 0;
-      background-color: #e6f7ff;
-      border-radius: 10px;
-      margin-bottom: 30px;
-    }
-    h1 {
-      color: #2a6496;
-      font-size: 2.5em;
-    }
-    .tagline {
-      color: #5a8bb5;
-      font-style: italic;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Space - Your Wellness Hub</title>
+    <style>
 
-    /* Flex layout for features + mood tracker */
-    .features-section {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 30px;
-      align-items: flex-start;
-    }
-    .features {
-      flex: 1;
-      display: flex;
-      flex-direction: column;   /* stack buttons vertically */
-      align-items: flex-start;  /* align them to the same left edge */
-      gap: 20px;                /* spacing between buttons */
-    }
-    .feature {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    .feature:hover {
-      transform: translateY(-5px);
-    }
-    .feature h3 {
-      color: #2a6496;
-      margin-top: 0;
-    }
+/* Auth buttons */
+header {
+  position: relative;
+}
 
-    button {
-      background-color: #4a90e2;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #3a7bc8;
-    }
+.auth-buttons {
+  position: absolute;
+  top: 20px;
+  right: 80px; /* leave space for profile button */
+}
 
-    /* Mood tracker styles */
-    .mood-tracker {
-      flex: 1;
-      background: #e6f7ff;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .mood-tracker h3 {
-      margin-top: 0;
-      color: #2a6496;
-    }
-    .mood-options {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 15px;
-    }
-    .mood-options button {
-      font-size: 24px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .mood-options button:hover {
-      transform: scale(1.2);
-    }
-    .mood-result {
-      margin-top: 15px;
-      font-weight: bold;
-      color: #4a90e2;
-    }
+.auth-buttons button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
 
-    .planner-section {
-      text-align: center;
-      margin: 40px 0;
-    }
-    .planner-img {
-      width: 450px;
-      height: 310px;
-      border-radius: 9px;
-      box-shadow: 0 4px 9px rgba(0,0,0,0.1);
-    }
+.auth-buttons button:hover {
+  background-color: #3a7bc8;
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+/* Circle profile button */
+.profile-button {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
 
-    /* Feature buttons */
-    .feature button {
-      background-color: #5a8bb5; /* blue background */
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .feature button:hover {
-      background-color: #2a6496; /* darker blue on hover */
-    }
-  </style>
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #4a90e2;
+  transition: transform 0.2s;
+}
+
+.profile-img:hover {
+  transform: scale(1.1);
+}
+
+/* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 8% auto;
+  padding: 20px;
+  width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  color: #2a6496;
+}
+
+.modal-content label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.modal-content input, 
+.modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.modal-content button {
+  width: 100%;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #3a7bc8;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background-color: #e6f7ff;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2a6496;
+            font-size: 2.5em;
+        }
+        .tagline {
+            color: #5a8bb5;
+            font-style: italic;
+        }
+        /* Flex layout for features + mood tracker */
+        .features-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        .features {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .feature {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature h3 {
+            color: #2a6496;
+            margin-top: 0;
+        }
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3a7bc8;
+        }
+        /* Mood tracker styles */
+        .mood-tracker {
+            flex: 1;
+            background: #e6f7ff;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .mood-tracker h3 {
+            margin-top: 0;
+            color: #2a6496;
+        }
+        .mood-options {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        .mood-options button {
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .mood-options button:hover {
+            transform: scale(1.2);
+        }
+        .mood-result {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #4a90e2;
+        }
+        .planner-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .planner-img {
+            width: 450px;
+            height: 310px;
+            border-radius: 9px;
+            box-shadow: 0 4px 9px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Connect Space</h1>
-      <p class="tagline">Your pathway to wellness and connection</p>
-    </header>
+    <div class="container">
+  <header>
+  <h1>Connect Space</h1>
+  <p class="tagline">Your pathway to wellness and connection</p>
 
-    <!-- Profile Section -->
-<div class="profile-section">
-  <h2>Create Your Profile</h2>
-  <p>Sign up or sign in to personalize your Connect Space journey.</p>
-
-  <!-- Sign Up Form -->
-  <div class="form-box">
-    <h3>Sign Up</h3>
-    <form>
-      <label>Username</label>
-      <input type="text" name="username" required>
-      
-      <label>Email</label>
-      <input type="email" name="email" required>
-      
-      <label>Password</label>
-      <input type="password" name="password" required>
-      
-      <button type="submit">Sign Up</button>
-    </form>
+  <!-- Auth Buttons in Upper Right -->
+  <div class="auth-buttons">
+    <button onclick="document.getElementById('signinModal').style.display='block'">Sign In</button>
+    <button onclick="document.getElementById('signupModal').style.display='block'">Sign Up</button>
   </div>
 
-  <!-- Sign In Form -->
-  <div class="form-box">
+  <!-- Circle Profile Button (hidden until signed in) -->
+  <div class="profile-button" id="profileBtn" style="display:none;" 
+       onclick="document.getElementById('profileModal').style.display='block'">
+    <img src="https://via.placeholder.com/40" alt="Profile" class="profile-img" id="profileImg">
+  </div>
+</header>
+
+<!-- Sign In Modal -->
+<div id="signinModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('signinModal').style.display='none'">&times;</span>
     <h3>Sign In</h3>
-    <form>
+    <form onsubmit="event.preventDefault(); userSignedIn();">
       <label>Email</label>
-      <input type="email" name="email" required>
-      
+      <input type="email" required>
       <label>Password</label>
-      <input type="password" name="password" required>
-      
+      <input type="password" required>
       <button type="submit">Sign In</button>
     </form>
   </div>
 </div>
 
-    <!-- Features + Mood Tracker side by side -->
-    <div class="features-section">
-      <div class="features">
-        <div class="feature">
-          <button onclick="window.location.href='story.html'">📝Share Your Story</button>
-        </div>
-        <div class="feature">
-          <button onclick="window.location.href='articles.html'">📚Explore Articles</button>
-        </div>
-        <div class="feature">
-          <button onclick="window.location.href='community.html'">🫂Join Community</button>
-        </div>
-      </div>
+<!-- Sign Up Modal -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('signupModal').style.display='none'">&times;</span>
+    <h3>Sign Up</h3>
+    <form onsubmit="event.preventDefault(); userSignedIn();">
+      <label>Username</label>
+      <input type="text" required>
+      <label>Email</label>
+      <input type="email" required>
+      <label>Password</label>
+      <input type="password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>
 
-      <div class="mood-tracker">
-        <h3>Track Your Mood</h3>
-        <p>Hi Bestie! How are you feeling today?</p>
-        <div class="mood-options">
-          <button onclick="setMood('😊 Happy')">😊</button>
-          <button onclick="setMood('😐 Neutral')">😐</button>
-          <button onclick="setMood('😔 Sad')">😔</button>
-          <button onclick="setMood('😤 Stressed')">😤</button>
+<!-- Profile Modal -->
+<div id="profileModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="document.getElementById('profileModal').style.display='none'">&times;</span>
+    <h3>Customize Your Profile</h3>
+    <form>
+      <label>Upload Profile Picture</label>
+      <input type="file" accept="image/*" onchange="previewProfilePic(event)">
+
+      <label>Bio</label>
+      <textarea rows="3" placeholder="Write something about yourself..."></textarea>
+
+      <label>Interests</label>
+      <input type="text" placeholder="e.g. Reading, Fitness, Music">
+
+      <button type="submit">Save Profile</button>
+    </form>
+  </div>
+</div>
+
+        <!-- Features + Mood Tracker side by side -->
+        <div class="features-section">
+            <div class="features">
+                <div class="feature">
+                  <a href="story.html">
+                    <button>📝Share Your Story</button>
+                  </a>
+                </div>
+
+                <div class="feature">
+                  <a href="articles.html">
+                    <button>📚Explore Articles</button>
+                  </a>
+                </div>
+                
+                <div class="feature">
+                  <a href="community.html">
+                    <button>🫂Join Community</button>
+                  </a>
+                </div>
+            </div>
+
+            <div class="mood-tracker">
+                <h3>Track Your Mood</h3>
+                <p>Hi Bestie! How are you feeling today?</p>
+                <div class="mood-options">
+                    <button onclick="setMood('😊 Happy')">😊</button>
+                    <button onclick="setMood('😐 Neutral')">😐</button>
+                    <button onclick="setMood('😔 Sad')">😔</button>
+                    <button onclick="setMood('😤 Stressed')">😤</button>
+                </div>
+                <div class="mood-result" id="moodResult"></div>
+            </div>
         </div>
-        <div class="mood-result" id="moodResult"></div>
-      </div>
-    </div>
 
-    <div class="planner-section">
-      <h2>Daily Habit Reminders</h2>
-      <img src="https://www.makerstations.io/content/images/2022/03/olja-lobkis-studygram-04.jpeg"
-           alt="Planner notebook" class="planner-img">
+<div class="planner-section">
+  <h2>Daily Habit Reminders</h2>
+  <img src="https://www.makerstations.io/content/images/2022/03/olja-lobkis-studygram-04.jpeg" 
+       alt="Planner notebook" class="planner-img">
 
-      <!-- Checklist -->
-      <div class="habit-checklist" style="text-align:left; margin-top:15px;">
-        <label><input type="checkbox"> Drink 8 glasses of water</label><br>
-        <label><input type="checkbox"> Meditate for 10 minutes</label><br>
-        <label><input type="checkbox"> Exercise / stretch</label><br>
-        <label><input type="checkbox"> Write in journal</label><br>
-        <label><input type="checkbox"> Sleep 7–8 hours</label>
-      </div>
-
-      <div style="margin-top: 10px; text-align:center;">
-        <button>🔔 Set Up Reminders</button>
-      </div>
-    </div>
+  <!-- Checklist -->
+  <div class="habit-checklist" style="text-align:left; margin-top:15px;">
+    <label><input type="checkbox"> Drink 8 glasses of water</label><br>
+    <label><input type="checkbox"> Meditate for 10 minutes</label><br>
+    <label><input type="checkbox"> Exercise / stretch</label><br>
+    <label><input type="checkbox"> Write in journal</label><br>
+    <label><input type="checkbox"> Sleep 7–8 hours</label>
   </div>
 
-  <script>
-    // Simple hover effect enhancement
-    document.querySelectorAll('button').forEach(button => {
-      button.addEventListener('mouseover', function() {
-        this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
-      });
-      button.addEventListener('mouseout', function() {
-        this.style.boxShadow = 'none';
-      });
-    });
+  <div style="margin-top: 10px; text-align:center;">
+    <button>🔔 Set Up Reminders</button>
+  </div>
+</div>
 
-    // Mood tracker function
-    function setMood(mood) {
-      document.getElementById('moodResult').textContent = "You selected: " + mood;
-    }
-  </script>
+    <script>
+        // Simple hover effect enhancement
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mouseover', function() {
+                this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            });
+            button.addEventListener('mouseout', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Mood tracker function
+        function setMood(mood) {
+            document.getElementById('moodResult').textContent = "You selected: " + mood;
+        }
+    </script>
+
+    function userSignedIn() {
+  // Hide auth buttons
+  document.querySelector('.auth-buttons').style.display = 'none';
+  // Show profile button
+  document.getElementById('profileBtn').style.display = 'block';
+  // Close modals
+  document.getElementById('signinModal').style.display = 'none';
+  document.getElementById('signupModal').style.display = 'none';
+}
+
+function previewProfilePic(event) {
+  const img = document.getElementById('profileImg');
+  img.src = URL.createObjectURL(event.target.files[0]);
+}
 </body>
 </html>
+
+
+
