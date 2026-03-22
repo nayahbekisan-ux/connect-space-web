@@ -139,36 +139,6 @@
             margin-bottom: 2px;
         }
 
-        /* --- POST CREATOR --- */
-        .create-post-card {
-            background: #fdfaf5;
-            border: 1px solid #f0e6d8;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 30px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .create-post-card textarea {
-            border: 1px solid #f0e6d8;
-            border-radius: 12px;
-            padding: 15px;
-            font-family: inherit;
-            resize: none;
-            outline: none;
-        }
-        .create-post-card button {
-            align-self: flex-end;
-            background-color: #a3b18a;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
         /* --- GRID SECTION --- */
         .tabs {
             display: flex;
@@ -247,6 +217,99 @@
             opacity: 1;
         }
 
+        /* --- CUSTOM MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(93, 87, 79, 0.4);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 1px solid #f0e6d8;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            color: #8c7851;
+            font-weight: 800;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 12px;
+            border: 2px solid #f3e9dc;
+            font-family: inherit;
+            font-size: 15px;
+            margin: 15px 0;
+            outline: none;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        .modal-input:focus {
+            border-color: #a3b18a;
+        }
+
+        .modal-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .btn-save {
+            background-color: #a3b18a;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #84936e;
+        }
+
+        .btn-save:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #84936e;
+        }
+
+        .btn-cancel {
+            background-color: #efefef;
+            color: #5d574f;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
         @media (max-width: 768px) {
             .profile-header {
                 flex-direction: column;
@@ -275,8 +338,8 @@
 
             <div class="profile-info">
                 <div class="username-row">
-                    <h2 id="username">cozy_explorer</h2>
-                    <button class="btn-secondary" onclick="editUsername()">Edit Username</button>
+                    <h2 id="username">wellness_explorer</h2>
+                    <button class="btn-secondary" onclick="openUsernameModal()">Edit Username</button>
                     <span style="cursor:pointer; font-size: 20px;">⚙️</span>
                 </div>
 
@@ -288,9 +351,9 @@
 
                 <!-- Editable Bio Section -->
                 <div class="bio">
-                    <span class="bio-name" id="display-name">Cozy Explorer</span>
+                    <span class="bio-name" id="display-name">Wellness Explorer</span>
                     <p id="bio-text" style="margin: 5px 0 10px 0;">Drinking tea and building cozy digital spaces. ✨ <br>Trying to balance screen time with green time. 🌿</p>
-                    <button class="btn-secondary" style="font-size: 12px; padding: 4px 10px;" onclick="editBio()">✎ Edit Bio</button>
+                    <button class="btn-secondary" style="font-size: 12px; padding: 4px 10px;" onclick="openBioModal()">✎ Edit Bio</button>
                 </div>
 
             </div>
@@ -321,11 +384,36 @@
         </div>
     </div>
 
+    <!-- CUSTOM MODALS -->
+    <div id="usernameModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Update Username</h3>
+            <input type="text" id="usernameInput" class="modal-input" placeholder="Enter new username...">
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModals()">Cancel</button>
+                <button class="btn-save" onclick="saveUsername()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="bioModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3>Update Profile</h3>
+            <p style="font-size: 13px; margin: 0; color: #8e8e8e;">Display Name</p>
+            <input type="text" id="displayNameInput" class="modal-input" placeholder="Display name">
+            <p style="font-size: 13px; margin: 0; color: #8e8e8e;">Bio</p>
+            <textarea id="bioInput" class="modal-input modal-textarea" placeholder="Tell us about yourself..."></textarea>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModals()">Cancel</button>
+                <button class="btn-save" onclick="saveBio()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // --- PROFILE PICTURE LOGIC ---
         const uploadInput = document.getElementById('upload');
         const profilePic = document.getElementById('profile-pic');
-        let postCounter = 4;
 
         uploadInput.addEventListener('change', function() {
             const file = this.files[0];
@@ -338,27 +426,52 @@
             }
         });
 
-        // --- PROFILE EDITING LOGIC ---
-        function editUsername() {
-            const newName = prompt("Edit Username:", document.getElementById('username').innerText);
-            if (newName && newName.trim() !== "") {
-                document.getElementById('username').innerText = newName.toLowerCase().replace(/\s+/g, '_');
+        // --- MODAL LOGIC ---
+        function openUsernameModal() {
+            const current = document.getElementById('username').innerText;
+            document.getElementById('usernameInput').value = current;
+            document.getElementById('usernameModal').style.display = 'flex';
+            document.getElementById('usernameInput').focus();
+        }
+
+        function openBioModal() {
+            const currentName = document.getElementById('display-name').innerText;
+            const currentBio = document.getElementById('bio-text').innerHTML.replace(/<br\s*[\/]?>/gi, '\n');
+            
+            document.getElementById('displayNameInput').value = currentName;
+            document.getElementById('bioInput').value = currentBio;
+            document.getElementById('bioModal').style.display = 'flex';
+        }
+
+        function closeModals() {
+            document.getElementById('usernameModal').style.display = 'none';
+            document.getElementById('bioModal').style.display = 'none';
+        }
+
+        function saveUsername() {
+            const val = document.getElementById('usernameInput').value;
+            if (val && val.trim() !== "") {
+                document.getElementById('username').innerText = val.toLowerCase().replace(/\s+/g, '_');
+                closeModals();
             }
         }
 
-        function editBio() {
-            const currentDisplayName = document.getElementById('display-name').innerText;
-            const currentBioText = document.getElementById('bio-text').innerHTML.replace(/<br\s*[\/]?>/gi, '\n'); // Convert breaks back to newlines
+        function saveBio() {
+            const newName = document.getElementById('displayNameInput').value;
+            const newBio = document.getElementById('bioInput').value;
             
-            const newDisplayName = prompt("Edit Display Name:", currentDisplayName);
-            if (newDisplayName !== null && newDisplayName.trim() !== "") {
-                document.getElementById('display-name').innerText = newDisplayName;
+            if (newName && newName.trim() !== "") {
+                document.getElementById('display-name').innerText = newName;
             }
+            
+            document.getElementById('bio-text').innerHTML = newBio.replace(/\n/g, '<br>');
+            closeModals();
+        }
 
-            const newBioText = prompt("Edit your personal bio:", currentBioText);
-            if (newBioText !== null) {
-                // Convert newlines to breaks for HTML rendering
-                document.getElementById('bio-text').innerHTML = newBioText.replace(/\n/g, '<br>');
+        // Close modal on escape key or clicking background
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModals();
             }
         }
     </script>
