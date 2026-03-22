@@ -5,111 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect Space - Your Wellness Hub</title>
     <style>
+        /* Auth buttons */
+        .auth-buttons {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            transition: opacity 0.3s ease;
+        }
 
-/* Auth buttons */
-header {
-  position: relative;
-}
+        .auth-buttons button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-.auth-buttons {
-  position: absolute;
-  top: 20px;
-  right: 80px; /* leave space for profile button */
-}
+        .auth-buttons button:hover {
+            background-color: #3a7bc8;
+        }
 
-.auth-buttons button {
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  margin-left: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-}
+        /* Circle profile button */
+        .profile-button {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: none; /* Keep it hidden completely until shown */
+        }
 
-.auth-buttons button:hover {
-  background-color: #3a7bc8;
-}
+        .profile-button.show {
+            display: block;
+            opacity: 1;
+        }
 
-/* Circle profile button */
-.profile-button {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  cursor: pointer;
-}
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #4a90e2;
+            transition: transform 0.2s;
+        }
 
-.profile-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid #4a90e2;
-  transition: transform 0.2s;
-}
+        .profile-img:hover {
+            transform: scale(1.1);
+        }
 
-.profile-img:hover {
-  transform: scale(1.1);
-}
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
 
-/* Modal styling */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.5);
-}
+        .modal-content {
+            background: #fff;
+            margin: 8% auto;
+            padding: 20px;
+            width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
 
-.modal-content {
-  background: #fff;
-  margin: 8% auto;
-  padding: 20px;
-  width: 400px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+        .modal-content h3 {
+            color: #2a6496;
+        }
 
-.modal-content h3 {
-  color: #2a6496;
-}
+        .modal-content label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
 
-.modal-content label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
+        .modal-content input, 
+        .modal-content textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Ensures padding doesn't widen the inputs */
+        }
 
-.modal-content input, 
-.modal-content textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
+        .modal-content button {
+            width: 100%;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.modal-content button {
-  width: 100%;
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
+        .modal-content button:hover {
+            background-color: #3a7bc8;
+        }
 
-.modal-content button:hover {
-  background-color: #3a7bc8;
-}
-
-.close {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
-}
+        .close {
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
 
         body {
             font-family: 'Arial', sans-serif;
@@ -130,10 +135,12 @@ header {
             background-color: #e6f7ff;
             border-radius: 10px;
             margin-bottom: 30px;
+            position: relative;
         }
         h1 {
             color: #2a6496;
             font-size: 2.5em;
+            margin-top: 0;
         }
         .tagline {
             color: #5a8bb5;
@@ -203,9 +210,12 @@ header {
             border: none;
             cursor: pointer;
             transition: transform 0.2s;
+            padding: 5px;
         }
         .mood-options button:hover {
             transform: scale(1.2);
+            background: none;
+            box-shadow: none !important;
         }
         .mood-result {
             margin-top: 15px;
@@ -221,99 +231,80 @@ header {
             height: 310px;
             border-radius: 9px;
             box-shadow: 0 4px 9px rgba(0,0,0,0.1);
+            object-fit: cover;
         }
     </style>
 </head>
 <body>
     <div class="container">
-  <header>
-  <h1>Connect Space</h1>
-  <p class="tagline">Your pathway to wellness and connection</p>
+        <header>
+            <h1>Connect Space</h1>
+            <p class="tagline">Your pathway to wellness and connection</p>
 
-  <!-- Auth Buttons in Upper Right -->
-  <div class="auth-buttons">
-    <button onclick="document.getElementById('signinModal').style.display='block'">Sign In</button>
-    <button onclick="document.getElementById('signupModal').style.display='block'">Sign Up</button>
-  </div>
+            <!-- Auth Buttons in Upper Right -->
+            <div class="auth-buttons" id="authButtonsContainer">
+                <button onclick="document.getElementById('signinModal').style.display='block'">Sign In</button>
+                <button onclick="document.getElementById('signupModal').style.display='block'">Sign Up</button>
+            </div>
 
-  <!-- Circle Profile Button (hidden until signed in) -->
-  <div class="profile-button" id="profileBtn" style="display:none;" 
-       onclick="document.getElementById('profileModal').style.display='block'">
-    <img src="https://via.placeholder.com/40" alt="Profile" class="profile-img" id="profileImg">
-  </div>
-</header>
+            <!-- Circle Profile Button (hidden until signed in) -->
+            <!-- Changed onclick to navigate to profile.html -->
+            <div class="profile-button" id="profileBtn" onclick="window.location.href='profile.html'">
+                <img src="https://placehold.net/avatar-4.png" alt="Profile" class="profile-img" id="profileImg">
+            </div>
+        </header>
 
-<!-- Sign In Modal -->
-<div id="signinModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="document.getElementById('signinModal').style.display='none'">&times;</span>
-    <h3>Sign In</h3>
-    <form onsubmit="event.preventDefault(); userSignedIn();">
-      <label>Email</label>
-      <input type="email" required>
-      <label>Password</label>
-      <input type="password" required>
-      <button type="submit">Sign In</button>
-    </form>
-  </div>
-</div>
+        <!-- Sign In Modal -->
+        <div id="signinModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('signinModal').style.display='none'">&times;</span>
+                <h3>Sign In</h3>
+                <form onsubmit="event.preventDefault(); userSignedIn();">
+                    <label>Email</label>
+                    <input type="email" required>
+                    <label>Password</label>
+                    <input type="password" required>
+                    <button type="submit">Sign In</button>
+                </form>
+            </div>
+        </div>
 
-<!-- Sign Up Modal -->
-<div id="signupModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="document.getElementById('signupModal').style.display='none'">&times;</span>
-    <h3>Sign Up</h3>
-    <form onsubmit="event.preventDefault(); userSignedIn();">
-      <label>Username</label>
-      <input type="text" required>
-      <label>Email</label>
-      <input type="email" required>
-      <label>Password</label>
-      <input type="password" required>
-      <button type="submit">Sign Up</button>
-    </form>
-  </div>
-</div>
-
-<!-- Profile Modal -->
-<div id="profileModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="document.getElementById('profileModal').style.display='none'">&times;</span>
-    <h3>Customize Your Profile</h3>
-    <form>
-      <label>Upload Profile Picture</label>
-      <input type="file" accept="image/*" onchange="previewProfilePic(event)">
-
-      <label>Bio</label>
-      <textarea rows="3" placeholder="Write something about yourself..."></textarea>
-
-      <label>Interests</label>
-      <input type="text" placeholder="e.g. Reading, Fitness, Music">
-
-      <button type="submit">Save Profile</button>
-    </form>
-  </div>
-</div>
+        <!-- Sign Up Modal -->
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('signupModal').style.display='none'">&times;</span>
+                <h3>Sign Up</h3>
+                <form onsubmit="event.preventDefault(); userSignedIn();">
+                    <label>Username</label>
+                    <input type="text" required>
+                    <label>Email</label>
+                    <input type="email" required>
+                    <label>Password</label>
+                    <input type="password" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
 
         <!-- Features + Mood Tracker side by side -->
         <div class="features-section">
             <div class="features">
                 <div class="feature">
-                  <a href="story.html">
-                    <button>📝Share Your Story</button>
-                  </a>
+                    <a href="story.html" style="text-decoration: none;">
+                        <button style="width: 100%;">📝 Share Your Story</button>
+                    </a>
                 </div>
 
                 <div class="feature">
-                  <a href="articles.html">
-                    <button>📚Explore Articles</button>
-                  </a>
+                    <a href="articles.html" style="text-decoration: none;">
+                        <button style="width: 100%;">📚 Explore Articles</button>
+                    </a>
                 </div>
                 
                 <div class="feature">
-                  <a href="community.html">
-                    <button>🫂Join Community</button>
-                  </a>
+                    <a href="community.html" style="text-decoration: none;">
+                        <button style="width: 100%;">🫂 Join Community</button>
+                    </a>
                 </div>
             </div>
 
@@ -330,63 +321,60 @@ header {
             </div>
         </div>
 
-<div class="planner-section">
-  <h2>Daily Habit Reminders</h2>
-  <img src="https://www.makerstations.io/content/images/2022/03/olja-lobkis-studygram-04.jpeg" 
-       alt="Planner notebook" class="planner-img">
+        <div class="planner-section">
+            <h2>Daily Habit Reminders</h2>
+            <img src="https://www.makerstations.io/content/images/2022/03/olja-lobkis-studygram-04.jpeg" 
+                alt="Planner notebook" class="planner-img">
 
-  <!-- Checklist -->
-  <div class="habit-checklist" style="text-align:left; margin-top:15px;">
-    <label><input type="checkbox"> Drink 8 glasses of water</label><br>
-    <label><input type="checkbox"> Meditate for 10 minutes</label><br>
-    <label><input type="checkbox"> Exercise / stretch</label><br>
-    <label><input type="checkbox"> Write in journal</label><br>
-    <label><input type="checkbox"> Sleep 7–8 hours</label>
-  </div>
+            <!-- Checklist -->
+            <div class="habit-checklist" style="text-align:left; margin-top:15px; display: inline-block;">
+                <label><input type="checkbox"> Drink 8 glasses of water</label><br>
+                <label><input type="checkbox"> Meditate for 10 minutes</label><br>
+                <label><input type="checkbox"> Exercise / stretch</label><br>
+                <label><input type="checkbox"> Write in journal</label><br>
+                <label><input type="checkbox"> Sleep 7–8 hours</label>
+            </div>
 
-  <div style="margin-top: 10px; text-align:center;">
-    <button>🔔 Set Up Reminders</button>
-  </div>
-</div>
+            <div style="margin-top: 15px; text-align:center;">
+                <button>🔔 Set Up Reminders</button>
+            </div>
+        </div>
 
-    <script>
-        // Simple hover effect enhancement
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('mouseover', function() {
-                this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+        <script>
+            // Simple hover effect enhancement for standard buttons
+            document.querySelectorAll('button:not(.mood-options button)').forEach(button => {
+                button.addEventListener('mouseover', function() {
+                    this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+                });
+                button.addEventListener('mouseout', function() {
+                    this.style.boxShadow = 'none';
+                });
             });
-            button.addEventListener('mouseout', function() {
-                this.style.boxShadow = 'none';
-            });
-        });
 
-        // Mood tracker function
-        function setMood(mood) {
-            document.getElementById('moodResult').textContent = "You selected: " + mood;
-        }
-          // Function to run after successful sign in / sign up
-  function userSignedIn() {
-    // Hide Sign In / Sign Up buttons
-    document.querySelector('.auth-buttons').style.display = 'none';
+            // Mood tracker function
+            function setMood(mood) {
+                document.getElementById('moodResult').textContent = "You selected: " + mood;
+            }
 
-    // Show profile button
-    document.getElementById('profileBtn').style.display = 'block';
+            // Function to run after successful sign in / sign up
+            function userSignedIn() {
+                const authButtons = document.getElementById('authButtonsContainer');
+                const profileBtn = document.getElementById('profileBtn');
 
-    // Close modals if open
-    document.getElementById('signinModal').style.display = 'none';
-    document.getElementById('signupModal').style.display = 'none';
-  }
+                
+                // Fade out Auth buttons
+                authButtons.style.opacity = '0';
+                
+                setTimeout(() => {
+                    authButtons.style.display = 'none'; // Remove from layout
+                    profileBtn.classList.add('show');   // Show the profile button
+                }, 300); // Wait for the 0.3s CSS transition to finish
 
-  // Preview uploaded profile picture
-  function previewProfilePic(event) {
-    const img = document.getElementById('profileImg');
-    img.src = URL.createObjectURL(event.target.files[0]);
-  }
-
-
-    </script>
+                // Close modals if open
+                document.getElementById('signinModal').style.display = 'none';
+                document.getElementById('signupModal').style.display = 'none';
+            }
+        </script>
+    </div>
 </body>
 </html>
-
-
-
