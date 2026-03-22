@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile | Connect Space</title>
+    <title>Connect Space - Your Cozy Wellness Hub</title>
     <style>
         /* --- CUTE & COZY THEME --- */
         @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
@@ -14,353 +14,377 @@
             color: #5d574f;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
 
-        .profile-container {
-            max-width: 935px; /* Standard Instagram width */
-            margin: 40px auto;
-            padding: 30px;
-            background: #fff;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(140, 120, 81, 0.05);
-            border: 1px solid #f0e6d8;
-            position: relative;
-        }
-
-        /* --- BACK BUTTON --- */
-        .back-btn {
-            position: absolute;
-            top: 25px;
-            left: 25px;
-            background-color: #a3b18a; 
-            color: white;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 0px #84936e;
-            z-index: 10;
-        }
-        .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0px #84936e;
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 60px;
-            margin-top: 50px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid #efefef;
-        }
-
-        /* --- AVATAR --- */
-        .avatar {
-            flex-shrink: 0;
-            text-align: center;
-        }
-        .avatar img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            border: 1px solid #dbdbdb;
-            padding: 5px;
-            object-fit: cover;
-            background-color: #fff;
-            transition: transform 0.4s;
-        }
-        .avatar img:hover {
-            transform: scale(1.02);
-        }
-        .upload-btn {
-            margin-top: 15px;
-            background-color: #fdf0d5;
-            color: #8c7851;
-            border: 1px solid #eaddcf;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 13px;
-        }
-
-        /* --- INFO SECTION --- */
-        .profile-info {
-            flex: 1;
-        }
-
-        .username-row {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .username-row h2 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: 400;
-            color: #262626;
-        }
-        .btn-secondary {
-            background-color: #efefef;
-            border: none;
-            border-radius: 8px;
-            padding: 5px 15px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 14px;
-            color: #262626;
-            transition: background 0.2s;
-        }
-        .btn-secondary:hover {
-            background-color: #e2e2e2;
-        }
-
-        .stats {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 20px;
-        }
-        .stat span {
-            font-weight: 800;
-        }
-
-        .bio {
-            font-size: 15px;
-            line-height: 1.4;
-            margin-bottom: 20px;
-        }
-        .bio-name {
-            font-weight: 800;
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        /* --- POST CREATOR --- */
-        .create-post-card {
-            background: #fdfaf5;
-            border: 1px solid #f0e6d8;
-            border-radius: 20px;
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
             padding: 20px;
-            margin: 30px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
         }
-        .create-post-card textarea {
-            border: 1px solid #f0e6d8;
-            border-radius: 12px;
-            padding: 15px;
-            font-family: inherit;
-            resize: none;
-            outline: none;
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #f3e9dc;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            position: relative;
+            border: 2px dashed #eaddcf;
         }
-        .create-post-card button {
-            align-self: flex-end;
+
+        h1 {
+            color: #8c7851;
+            font-size: 3em;
+            margin-top: 0;
+            font-weight: 800;
+        }
+
+        .tagline {
+            color: #a69080;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+
+        /* --- CUTE BUTTONS --- */
+        button {
             background-color: #a3b18a;
             color: white;
             border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 50px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0px #84936e;
         }
 
-        /* --- GRID SECTION --- */
-        .tabs {
+        button:hover {
+            transform: translateY(-2px);
+            background-color: #b5c49c;
+            box-shadow: 0 6px 0px #84936e;
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 0px 0px #84936e;
+        }
+
+        /* Auth buttons */
+        .auth-buttons {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .auth-buttons button {
+            padding: 8px 18px;
+            font-size: 13px;
+        }
+
+        /* Profile button */
+        .profile-button {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            cursor: pointer;
+            display: none; /* Hidden by default */
+        }
+
+        .profile-button.show {
+            display: block;
+        }
+
+        .profile-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #fdfaf5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(93, 87, 79, 0.4);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: #fff;
+            margin: 10% auto;
+            padding: 35px;
+            width: 90%;
+            max-width: 380px;
+            border-radius: 30px;
+            border: 4px solid #f3e9dc;
+            position: relative;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #f0e6d8;
+            border-radius: 15px;
+            font-family: 'Nunito', sans-serif;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .modal-content input:focus {
+            border-color: #a3b18a;
+        }
+
+        /* Layout Sections */
+        .features-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .features {
+            flex: 1;
+            min-width: 300px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .feature {
+            background-color: white;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: 0 8px 20px rgba(93, 87, 79, 0.05);
+            border: 1px solid #f0e6d8;
+        }
+
+        .mood-tracker {
+            flex: 1;
+            min-width: 300px;
+            background: #fdf0d5; 
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            border: 2px dashed #f1dca7;
+        }
+
+        .mood-options {
             display: flex;
             justify-content: center;
-            border-top: 1px solid #efefef;
-            gap: 60px;
-        }
-        .tab {
-            padding: 15px 0;
-            border-top: 1px solid transparent;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: #8e8e8e;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .tab.active {
-            border-top: 1px solid #262626;
-            color: #262626;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .post-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
+        .mood-options button {
+            font-size: 24px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: 55px;
+            height: 55px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mood-result {
+            margin-top: 20px;
+            font-weight: 800;
+            color: #bc6c25;
+        }
+
+        /* Planner */
+        .planner-section {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid #f0e6d8;
+            text-align: center;
+        }
+
+        .planner-img {
+            max-width: 100%;
+            height: auto;
+            width: 450px;
+            border-radius: 20px;
+            filter: sepia(10%);
+        }
+
+        .habit-checklist {
+            font-weight: 600;
+            accent-color: #a3b18a;
+            text-align: left;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .logout-btn {
+            background-color: #e07a5f;
+            box-shadow: 0 4px 0px #c96a50;
             margin-top: 10px;
         }
-
-        .post-item {
-            position: relative;
-            aspect-ratio: 1 / 1;
-            background: #f3e9dc;
-            border-radius: 4px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        /* Content inside post */
-        .post-content-preview {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            color: #8c7851;
-            font-size: 14px;
-            background: linear-gradient(135deg, #fff9f0 0%, #f3e9dc 100%);
-        }
-
-        /* Hover Overlay like IG */
-        .post-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            color: white;
-            opacity: 0;
-            transition: opacity 0.2s;
-            font-weight: 800;
-        }
-
-        .post-item:hover .post-overlay {
-            opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-            .profile-header {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 20px;
-            }
-            .username-row { justify-content: center; flex-wrap: wrap; }
-            .stats { justify-content: center; gap: 20px; }
-            .post-grid { gap: 3px; }
-        }
+        .logout-btn:hover { background-color: #f28482; box-shadow: 0 6px 0px #c96a50; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>Connect Space</h1>
+            <p class="tagline">Your cute pathway to wellness ✨</p>
 
-    <div class="profile-container">
-        <a href="#" class="back-btn">← Home</a>
-
-        <div class="profile-header">
-            <div class="avatar">
-                <img id="profile-pic" src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" alt="User Avatar">
-                <input type="file" id="upload" accept="image/*" style="display:none;">
-                <br>
-                <button class="upload-btn" onclick="document.getElementById('upload').click()">Edit Photo</button>
+            <!-- AUTH BUTTONS -->
+            <div class="auth-buttons" id="authButtonsContainer">
+                <button onclick="openModal('signinModal')">Sign In</button>
+                <button onclick="openModal('signupModal')">Sign Up</button>
             </div>
 
-            <div class="profile-info">
-                <div class="username-row">
-                    <h2 id="username">cozy_explorer</h2>
-                    <button class="btn-secondary" onclick="editUsername()">Edit Username</button>
-                    <span style="cursor:pointer; font-size: 20px;">⚙️</span>
+            <!-- PROFILE BUTTON (Hidden by default) -->
+            <div class="profile-button" id="profileBtn">
+                <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
+                    <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" 
+                         alt="Profile" 
+                         class="profile-img" 
+                         onclick="window.location.href='profile.html'">
+                    <button class="logout-btn" style="padding: 4px 10px; font-size: 10px;" onclick="handleLogout()">Log Out</button>
                 </div>
+            </div>
+        </header>
 
-                <div class="stats">
-                    <div class="stat"><span id="post-count">4</span> posts</div>
-                    <div class="stat"><span>1.2k</span> followers</div>
-                    <div class="stat"><span>450</span> following</div>
-                </div>
-
-                <!-- Editable Bio Section -->
-                <div class="bio">
-                    <span class="bio-name" id="display-name">Cozy Explorer</span>
-                    <p id="bio-text" style="margin: 5px 0 10px 0;">Drinking tea and building cozy digital spaces. ✨ <br>Trying to balance screen time with green time. 🌿</p>
-                    <button class="btn-secondary" style="font-size: 12px; padding: 4px 10px;" onclick="editBio()">✎ Edit Bio</button>
-                </div>
-
+        <!-- SIGN IN MODAL -->
+        <div id="signinModal" class="modal">
+            <div class="modal-content">
+                <span style="float:right; cursor:pointer; font-size:24px;" onclick="closeModal('signinModal')">&times;</span>
+                <h3>Welcome Back! ☁️</h3>
+                <form onsubmit="event.preventDefault(); handleLogin();">
+                    <label>Email</label><input type="email" required>
+                    <label>Password</label><input type="password" required>
+                    <button type="submit" style="width:100%; margin-top:10px;">Let's Go!</button>
+                </form>
             </div>
         </div>
 
-        <div class="tabs">
-            <div class="tab active">▦ POSTS</div>
-        </div>
-
-        <div class="post-grid" id="postGrid">
-            <!-- Initial Posts -->
-            <div class="post-item">
-                <div class="post-content-preview">Morning Yoga Session 🧘‍♀️✨ #Zen</div>
-                <div class="post-overlay"><span>❤️ 10</span> <span>💬 1</span></div>
-            </div>
-            <div class="post-item">
-                <div class="post-content-preview">Ate a rainbow today! 🥗🥑 #HealthyEating</div>
-                <div class="post-overlay"><span>❤️ 9</span> <span>💬 0</span></div>
-            </div>
-            <div class="post-item">
-                <div class="post-content-preview">Finally hit 10k steps before 6PM! 👟</div>
-                <div class="post-overlay"><span>❤️ 2</span> <span>💬 1</span></div>
-            </div>
-            <div class="post-item">
-                <div class="post-content-preview">Green tea > Coffee 🍵 #CozyVibes</div>
-                <div class="post-overlay"><span>❤️ 5</span> <span>💬 0</span></div>
+        <!-- SIGN UP MODAL -->
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                <span style="float:right; cursor:pointer; font-size:24px;" onclick="closeModal('signupModal')">&times;</span>
+                <h3>Join the Club! 🌸</h3>
+                <form onsubmit="event.preventDefault(); handleLogin();">
+                    <label>Username</label><input type="text" required>
+                    <label>Email</label><input type="email" required>
+                    <label>Password</label><input type="password" required>
+                    <button type="submit" style="width:100%; margin-top:10px;">Create Account</button>
+                </form>
             </div>
         </div>
-    </div>
 
-    <script>
-        // --- PROFILE PICTURE LOGIC ---
-        const uploadInput = document.getElementById('upload');
-        const profilePic = document.getElementById('profile-pic');
-        let postCounter = 4;
+        <div class="features-section">
+<div class="features">
+  <div class="feature">
+    <a href="story.html"><button style="width:100%;">📝 Share Your Story</button></a>
+  </div>
+  <div class="feature">
+    <a href="articles.html"><button style="width:100%;">📚 Explore Articles</button></a>
+  </div>
+  <div class="feature">
+    <a href="community.html"><button style="width:100%;">🫂 Join Community</button></a>
+  </div>
+</div>
 
-        uploadInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profilePic.src = e.target.result;
+            <div class="mood-tracker">
+                <h3>How are you, Bestie?</h3>
+                <div class="mood-options">
+                    <button onclick="setMood('😊 Happy')">😊</button>
+                    <button onclick="setMood('😐 Neutral')">😐</button>
+                    <button onclick="setMood('😔 Sad')">😔</button>
+                    <button onclick="setMood('😤 Stressed')">😤</button>
+                </div>
+                <div class="mood-result" id="moodResult"></div>
+            </div>
+        </div>
+
+        <div class="planner-section">
+            <h2>Daily Glow-Up Habits</h2>
+            <img src="https://www.makerstations.io/content/images/2022/03/olja-lobkis-studygram-04.jpeg" class="planner-img" alt="Planner">
+            <div class="habit-checklist">
+                <label><input type="checkbox"> Drink water 💧</label><br>
+                <label><input type="checkbox"> Meditate 🧘</label><br>
+                <label><input type="checkbox"> Stretch 🌸</label><br>
+                <label><input type="checkbox"> 8 hrs of sleep 😴</label><br>
+                <label><input type="checkbox"> Read my favorite book 📕</label>
+            </div>
+            <div style="margin-top:25px;"><button>🔔 Set Reminders</button></div>
+        </div>
+
+        <script>
+            // Elements
+            const authContainer = document.getElementById('authButtonsContainer');
+            const profileBtn = document.getElementById('profileBtn');
+
+            // --- CHECK LOGIN STATE ON LOAD ---
+            window.onload = function() {
+                const isLoggedIn = localStorage.getItem('isLoggedIn');
+                if (isLoggedIn === 'true') {
+                    showProfileUI();
                 }
-                reader.readAsDataURL(file);
-            }
-        });
+            };
 
-        // --- PROFILE EDITING LOGIC ---
-        function editUsername() {
-            const newName = prompt("Edit Username:", document.getElementById('username').innerText);
-            if (newName && newName.trim() !== "") {
-                document.getElementById('username').innerText = newName.toLowerCase().replace(/\s+/g, '_');
-            }
-        }
-
-        function editBio() {
-            const currentDisplayName = document.getElementById('display-name').innerText;
-            const currentBioText = document.getElementById('bio-text').innerHTML.replace(/<br\s*[\/]?>/gi, '\n'); // Convert breaks back to newlines
-            
-            const newDisplayName = prompt("Edit Display Name:", currentDisplayName);
-            if (newDisplayName !== null && newDisplayName.trim() !== "") {
-                document.getElementById('display-name').innerText = newDisplayName;
+            function showProfileUI() {
+                authContainer.style.display = 'none';
+                profileBtn.classList.add('show');
             }
 
-            const newBioText = prompt("Edit your personal bio:", currentBioText);
-            if (newBioText !== null) {
-                // Convert newlines to breaks for HTML rendering
-                document.getElementById('bio-text').innerHTML = newBioText.replace(/\n/g, '<br>');
+            function handleLogin() {
+                // Save login state to localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                // Hide modals
+                closeModal('signinModal');
+                closeModal('signupModal');
+                
+                // Switch UI
+                showProfileUI();
             }
-        }
-    </script>
+
+            function handleLogout() {
+                localStorage.removeItem('isLoggedIn');
+                location.reload(); // Refresh to reset UI
+            }
+
+            function openModal(id) {
+                document.getElementById(id).style.display = 'block';
+            }
+
+            function closeModal(id) {
+                document.getElementById(id).style.display = 'none';
+            }
+
+            function setMood(mood) {
+                document.getElementById('moodResult').textContent = "Current Vibe: " + mood;
+            }
+
+            // Close modal if user clicks outside of it
+            window.onclick = function(event) {
+                if (event.target.className === 'modal') {
+                    event.target.style.display = "none";
+                }
+            }
+        </script>
+    </div>
 </body>
 </html>
