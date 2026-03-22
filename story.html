@@ -5,145 +5,224 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Post | Connect Space</title>
   <style>
+    /* --- CUTE & COZY THEME --- */
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
     body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f0f8ff;
+      font-family: 'Nunito', sans-serif;
+      background-color: #fdfaf5; /* Warm cream */
+      color: #5d574f;
       margin: 0;
       padding: 0;
     }
+
     .container {
-      max-width: 600px;
-      margin: 20px auto;
+      max-width: 650px;
+      margin: 30px auto;
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(140, 120, 81, 0.05);
+      border: 1px solid #f0e6d8;
     }
+
     .post-header {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
-    .logo {
-      width: 40px;
-      height: 40px;
-      background-color: #4a90e2;
-      border-radius: 50%;
+
+    .logo-circle {
+      width: 45px;
+      height: 45px;
+      background-color: #a3b18a; /* Sage Green */
+      border-radius: 15px; /* Squircle */
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-weight: bold;
-      margin-right: 10px;
+      font-weight: 800;
+      margin-right: 15px;
+      box-shadow: 0 4px 10px rgba(163, 177, 138, 0.3);
     }
+
     .back-btn {
-      background: none;
-      border: none;
-      color: #4a90e2;
-      font-size: 16px;
+      background: transparent;
+      border: 1px solid #eaddcf;
+      color: #a69080;
+      padding: 8px 15px;
+      border-radius: 50px;
       cursor: pointer;
+      font-weight: 700;
+      transition: all 0.2s;
       margin-right: auto;
     }
+    .back-btn:hover {
+      background-color: #fdf0d5;
+      color: #8c7851;
+    }
+
+    /* --- INPUT STYLES --- */
     textarea {
       width: 100%;
-      height: 120px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 10px;
+      height: 140px;
+      border: 2px solid #f0e6d8;
+      border-radius: 20px;
+      padding: 15px;
+      font-family: 'Nunito', sans-serif;
       font-size: 16px;
+      color: #5d574f;
       resize: none;
       margin-bottom: 15px;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+      outline: none;
     }
+    textarea:focus {
+      border-color: #a3b18a;
+    }
+
     .attachment-options {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
     }
+
     .attachment-btn {
-      background: #f0f8ff;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 5px;
+      background: #fdfaf5;
+      border: 1px solid #eaddcf;
+      color: #8c7851;
+      padding: 10px 18px;
+      border-radius: 50px;
       cursor: pointer;
+      font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
+      transition: all 0.2s;
     }
-    .attachment-btn:hover { background: #e6f7ff; }
-    .post-btn {
-      background-color: #4a90e2;
+    .attachment-btn:hover {
+      background: #a3b18a;
       color: white;
+      border-color: #a3b18a;
+    }
+
+    /* --- ACTION BUTTONS --- */
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .post-btn {
+      flex: 1;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
+      padding: 14px;
+      border-radius: 50px;
       cursor: pointer;
+      font-weight: 800;
       font-size: 16px;
-      margin-right: 10px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .post-btn:hover { background-color: #3a7bc8; }
-    .post-btn.anonymous { background-color: #777; }
-    .post-btn.anonymous:hover { background-color: #555; }
-    .preview-area {
-      margin-top: 20px;
-      border: 1px dashed #ddd;
-      border-radius: 8px;
-      padding: 10px;
-      min-height: 100px;
-      display: none;
+
+    .post-btn.primary {
+      background-color: #a3b18a;
+      color: white;
+      box-shadow: 0 4px 0px #84936e;
     }
-    .feed { margin-top: 30px; }
+    .post-btn.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 0px #84936e;
+    }
+
+    .post-btn.anonymous {
+      background-color: #fdf0d5;
+      color: #bc6c25; /* Terracotta */
+      box-shadow: 0 4px 0px #eaddcf;
+    }
+    .post-btn.anonymous:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 0px #eaddcf;
+    }
+
+    /* --- FEED STYLES --- */
+    .feed { margin-top: 40px; }
+    
     .post {
-      background:white;
-      padding:15px;
-      margin-bottom:15px;
-      border-radius:8px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 25px;
+      border: 1px solid #f0e6d8;
+      box-shadow: 0 4px 15px rgba(140, 120, 81, 0.03);
       position: relative;
+      animation: fadeIn 0.5s ease;
     }
-    .meta {
-      font-size:12px;
-      color:#777;
-      margin-top:5px;
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
+
+    .post strong {
+      color: #bc6c25;
+      font-weight: 800;
+    }
+
+    .post .meta {
+      font-size: 13px;
+      color: #a69080;
+      margin-top: 15px;
+      font-style: italic;
+    }
+
     .delete-btn {
-      background:#ff4d4d;
-      color:white;
-      border:none;
-      padding:5px 10px;
-      border-radius:5px;
-      cursor:pointer;
-      font-size:12px;
+      background: #fdf0d5;
+      color: #bc6c25;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
       position: absolute;
-      top:10px;
-      right:10px;
+      top: 20px;
+      right: 20px;
     }
-    .delete-btn:hover { background:#cc0000; }
+    .delete-btn:hover { background: #fee4b3; }
+
+    .preview-area img, .preview-area video {
+      max-width: 100%;
+      border-radius: 20px;
+      margin-top: 10px;
+      border: 3px solid #fdfaf5;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="post-header">
       <button class="back-btn" onclick="history.back()">← Back</button>
-      <div class="logo">CS</div>
+      <div class="logo-circle">CS</div>
     </div>
 
-    <!-- Post form -->
-    <textarea id="postText" placeholder="What's on your mind?"></textarea>
+    <textarea id="postText" placeholder="Share a thought, a win, or just say hi... ✨"></textarea>
 
     <div class="attachment-options">
-      <button class="attachment-btn" onclick="document.getElementById('photo-input').click()">📷 Photo</button>
-      <button class="attachment-btn" onclick="document.getElementById('video-input').click()">▶️ Video</button>
-      <button class="attachment-btn">😊 Feeling/Activity</button>
+      <button class="attachment-btn" onclick="document.getElementById('photo-input').click()">📸 Photo</button>
+      <button class="attachment-btn" onclick="document.getElementById('video-input').click()">🎥 Video</button>
+      <button class="attachment-btn">☁️ Feeling</button>
       <input type="file" id="photo-input" accept="image/*" style="display:none">
       <input type="file" id="video-input" accept="video/*" style="display:none">
     </div>
 
-    <div class="preview-area" id="preview"></div>
+    <div class="preview-area" id="preview" style="display:none; margin-bottom: 20px;"></div>
 
-    <button class="post-btn anonymous" onclick="submitPost(true)">Post Anonymously</button>
-    <button class="post-btn" onclick="submitPost(false)">Post</button>
+    <div class="actions">
+      <button class="post-btn anonymous" onclick="submitPost(true)">Post Privately</button>
+      <button class="post-btn primary" onclick="submitPost(false)">Share with Community</button>
+    </div>
 
-    <!-- Feed -->
     <div class="feed" id="feed"></div>
   </div>
 
@@ -153,37 +232,36 @@
     const previewArea = document.getElementById('preview');
     const feed = document.getElementById('feed');
 
-    // Preview photo
     photoInput.addEventListener('change', function(e) {
       previewArea.style.display = 'block';
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(event) {
-          previewArea.innerHTML = `<img src="${event.target.result}" style="max-width:100%; border-radius:5px;">`;
+        reader.onload = (event) => {
+          previewArea.innerHTML = `<img src="${event.target.result}">`;
         }
         reader.readAsDataURL(file);
       }
     });
 
-    // Preview video
     videoInput.addEventListener('change', function(e) {
       previewArea.style.display = 'block';
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = function(event) {
-          previewArea.innerHTML = `<video controls style="max-width:100%;"><source src="${event.target.result}"></video>`;
+        reader.onload = (event) => {
+          previewArea.innerHTML = `<video controls><source src="${event.target.result}"></video>`;
         }
         reader.readAsDataURL(file);
       }
     });
 
-    // Submit post
     function submitPost(isAnonymous) {
       const text = document.getElementById('postText').value.trim();
-      if (!text && previewArea.style.display === 'none') {
-        alert("Please write something or attach a file before posting!");
+      const attachment = previewArea.innerHTML;
+
+      if (!text && !attachment) {
+        alert("Your post is empty! Share a little something. ✨");
         return;
       }
 
@@ -191,25 +269,21 @@
         id: Date.now(),
         content: text,
         anonymous: isAnonymous,
-        timestamp: new Date().toLocaleString(),
-        attachment: previewArea.innerHTML
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " · " + new Date().toLocaleDateString(),
+        attachment: attachment
       };
 
       let posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
       posts.unshift(post);
       localStorage.setItem("connectPosts", JSON.stringify(posts));
 
-      // Clear form
+      // Reset
       document.getElementById('postText').value = '';
       previewArea.style.display = 'none';
       previewArea.innerHTML = '';
-      photoInput.value = '';
-      videoInput.value = '';
-
       renderFeed();
     }
 
-    // Delete post
     function deletePost(id) {
       let posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
       posts = posts.filter(post => post.id !== id);
@@ -217,28 +291,29 @@
       renderFeed();
     }
 
-    // Render feed
     function renderFeed() {
       feed.innerHTML = '';
       const posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
+      
       if (posts.length === 0) {
-        feed.innerHTML = "<p>No posts yet. Be the first to share!</p>";
-      } else {
-        posts.forEach(post => {
-          const div = document.createElement("div");
-          div.className = "post";
-          div.innerHTML = `
-            <button class="delete-btn" onclick="deletePost(${post.id})">Delete</button>
-            <p><strong>${post.anonymous ? "Anonymous" : "You"}:</strong> ${post.content}</p>
-            ${post.attachment || ""}
-            <div class="meta">${post.timestamp}</div>
-          `;
-          feed.appendChild(div);
-        });
+        feed.innerHTML = "<p style='text-align:center; color:#a69080;'>Your feed is quiet... be the first to post! ☁️</p>";
+        return;
       }
+
+      posts.forEach(post => {
+        const div = document.createElement("div");
+        div.className = "post";
+        div.innerHTML = `
+          <button class="delete-btn" onclick="deletePost(${post.id})">Remove</button>
+          <p><strong>${post.anonymous ? "👤 Someone kind" : "✨ You"}</strong></p>
+          <p>${post.content}</p>
+          ${post.attachment || ""}
+          <div class="meta">${post.timestamp}</div>
+        `;
+        feed.appendChild(div);
+      });
     }
 
-    // Load feed on page load
     renderFeed();
   </script>
 </body>
