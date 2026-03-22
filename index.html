@@ -364,22 +364,27 @@ header {
         function setMood(mood) {
             document.getElementById('moodResult').textContent = "You selected: " + mood;
         }
+          // Function to run after successful sign in / sign up
+  function userSignedIn() {
+    // Hide Sign In / Sign Up buttons
+    document.querySelector('.auth-buttons').style.display = 'none';
+
+    // Show profile button
+    document.getElementById('profileBtn').style.display = 'block';
+
+    // Close modals if open
+    document.getElementById('signinModal').style.display = 'none';
+    document.getElementById('signupModal').style.display = 'none';
+  }
+
+  // Preview uploaded profile picture
+  function previewProfilePic(event) {
+    const img = document.getElementById('profileImg');
+    img.src = URL.createObjectURL(event.target.files[0]);
+  }
+
+
     </script>
-
-    function userSignedIn() {
-  // Hide auth buttons
-  document.querySelector('.auth-buttons').style.display = 'none';
-  // Show profile button
-  document.getElementById('profileBtn').style.display = 'block';
-  // Close modals
-  document.getElementById('signinModal').style.display = 'none';
-  document.getElementById('signupModal').style.display = 'none';
-}
-
-function previewProfilePic(event) {
-  const img = document.getElementById('profileImg');
-  img.src = URL.createObjectURL(event.target.files[0]);
-}
 </body>
 </html>
 
