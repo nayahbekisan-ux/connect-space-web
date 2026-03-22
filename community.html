@@ -23,19 +23,32 @@
             padding: 20px;
         }
 
+        /* --- UPDATED HEADER LAYOUT --- */
         header {
-            text-align: center;
             padding: 40px 20px;
             background-color: #f3e9dc; /* Soft beige */
             border-radius: 25px;
             margin-bottom: 30px;
-            position: relative;
             border: 2px dashed #eaddcf;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-top {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .header-content {
+            text-align: center;
         }
 
         h1 {
             color: #8c7851;
-            font-size: 2.5em;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             margin: 0;
             font-weight: 800;
         }
@@ -43,29 +56,32 @@
         header p {
             color: #a69080;
             font-style: italic;
-            margin-top: 5px;
+            margin: 5px 0 0 0;
         }
 
         /* --- CUTE BACK BUTTON --- */
         .back-btn {
-            position: absolute;
-            left: 20px;
-            top: 20px;
             background-color: #a3b18a; /* Sage Green */
             color: white;
             border: none;
-            padding: 8px 18px;
+            padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.9em;
+            font-family: 'Nunito', sans-serif;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 0px #84936e;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
         }
 
         .back-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 0px #84936e;
+            background-color: #b5c49c;
         }
 
         .back-btn:active {
@@ -190,14 +206,25 @@
             border-radius: 4px;
             padding: 2px;
         }
+
+        @media (max-width: 600px) {
+            header { padding: 30px 15px; }
+            .header-top { justify-content: center; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <button class="back-btn" onclick="location.href='index.html'">← Home</button>
-            <h1>Join Our Community</h1>
-            <p>Connect with your wellness besties! ✨</p>
+            <div class="header-top">
+                <button class="back-btn" onclick="location.href='index.html'">
+                    <span>←</span> Home
+                </button>
+            </div>
+            <div class="header-content">
+                <h1>Join Our Community</h1>
+                <p>Connect with your wellness besties! ✨</p>
+            </div>
         </header>
 
         <div class="section">
