@@ -5,136 +5,205 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wellness Articles | Connect Space</title>
     <style>
+        /* --- CUTE & COZY THEME --- */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-            color: #333;
+            font-family: 'Nunito', sans-serif;
+            background-color: #fdfaf5; /* Warm cream */
+            color: #5d574f;
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
         }
+
         header {
             text-align: center;
-            padding: 30px 0;
-            background-color: #e6f7ff;
-            border-radius: 10px;
+            padding: 40px 20px;
+            background-color: #f3e9dc;
+            border-radius: 25px;
             margin-bottom: 30px;
             position: relative;
+            border: 2px dashed #eaddcf;
         }
+
+        h1 {
+            color: #8c7851;
+            font-size: 2.5em;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        header p {
+            color: #a69080;
+            font-style: italic;
+        }
+
+        /* --- CUTE BACK BUTTON --- */
         .back-btn {
             position: absolute;
             left: 20px;
             top: 20px;
-            background-color: #4a90e2;
+            background-color: #a3b18a;
             color: white;
             border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 8px 18px;
+            border-radius: 50px;
             cursor: pointer;
-            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 0px #84936e;
         }
-        h1 {
-            color: #2a6496;
-            font-size: 2em;
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0px #84936e;
         }
+
+        /* --- ARTICLE CARDS --- */
         .articles {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
         }
+
         .article-card {
             background: white;
-            border-radius: 8px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 20px rgba(93, 87, 79, 0.05);
+            border: 1px solid #f0e6d8;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
+
         .article-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(140, 120, 81, 0.1);
         }
+
         .article-img {
             width: 100%;
             height: 180px;
             object-fit: cover;
+            border-bottom: 1px solid #f0e6d8;
         }
+
         .article-content {
-            padding: 15px;
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
+
         .article-content h3 {
             margin: 0 0 10px;
-            color: #2a6496;
+            color: #bc6c25;
+            font-weight: 800;
         }
+
         .article-content p {
-            color: #666;
-            font-size: 0.9em;
+            color: #8c7851;
+            font-size: 0.95em;
+            margin-bottom: 15px;
         }
+
+        /* --- CUTE "READ MORE" BUTTON --- */
+        .read-more {
+            background-color: #fdf0d5;
+            color: #8c7851;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.85em;
+            align-self: flex-start;
+            transition: all 0.2s;
+        }
+
+        .article-card:hover .read-more {
+            background-color: #a3b18a;
+            color: white;
+        }
+
+        /* --- RECOMMENDED SECTION --- */
         .recommended {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px dashed #eaddcf;
         }
+
         .recommended h2 {
-            color: #2a6496;
-            margin-bottom: 20px;
+            color: #8c7851;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 30px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <button class="back-btn" onclick="location.href='index.html'">← Back</button>
+            <button class="back-btn" onclick="location.href='index.html'">← Home</button>
             <h1>Wellness Articles</h1>
-            <p>Explore our collection of health and wellbeing resources</p>
+            <p>Sparkly tips for a healthier you! ✨</p>
         </header>
 
         <div class="articles">
             <div class="article-card" onclick="location.href='article1.html'">
                 <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Healthy eating" class="article-img">
                 <div class="article-content">
-                    <h3>Eggs Crack the Myth</h3>
-                    <p>Separating fact from fiction in popular diet trends</p>
+                    <h3>Eggs: Crack the Myth 🥚</h3>
+                    <p>Separating fact from fiction in popular diet trends.</p>
+                    <span class="read-more">Read Entry</span>
                 </div>
             </div>
 
             <div class="article-card" onclick="location.href='article2.html'">
                 <img src="https://i.pinimg.com/736x/ca/93/4c/ca934ca813b93510ffc7939adb3d8e63.jpg" alt="Morning yoga" class="article-img">
                 <div class="article-content">
-                    <h3>5-Minute Morning Routine</h3>
-                    <p>Start your day energized with these simple exercises</p>
+                    <h3>5-Minute Glow Up 🧘</h3>
+                    <p>Start your day energized with these simple movements.</p>
+                    <span class="read-more">Read Entry</span>
                 </div>
             </div>
 
             <div class="article-card" onclick="location.href='article3.html'">
                 <img src="https://i.pinimg.com/1200x/d5/f1/73/d5f17389cf5788711a112026bbfce420.jpg" alt="Sleep tips" class="article-img">
                 <div class="article-content">
-                    <h3>The Science of Sleep</h3>
-                    <p>How quality rest transforms your health and productivity</p>
+                    <h3>The Science of Sleep ☁️</h3>
+                    <p>How quality rest transforms your health and productivity.</p>
+                    <span class="read-more">Read Entry</span>
                 </div>
             </div>
         </div>
 
         <div class="recommended">
-            <h2>Recommended Articles</h2>
+            <h2>Handpicked for You 🌸</h2>
             <div class="articles">
                 <div class="article-card" onclick="location.href='article4.html'">
-                    <img src="data:image/jpeg;base64,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" alt="Stress relief" class="article-img">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Stress relief" class="article-img">
                     <div class="article-content">
-                        <h3>From Hot Mess to No Stress</h3>
-                        <p>Practical ways to reduce daily stress</p>
+                        <h3>No More Stress! 🌿</h3>
+                        <p>Practical and cozy ways to reduce your daily stress.</p>
+                        <span class="read-more">Read Entry</span>
                     </div>
                 </div>
 
                 <div class="article-card" onclick="location.href='article5.html'">
-                    <img src="data:image/jpeg;base64,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" alt="Digital detox" class="article-img">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Fasting tips" class="article-img">
                     <div class="article-content">
-                        <h3>How To Stay Energized If You're Fasting During Ramadan, According To Nutrition Experts</h3>
-                        <p>Energy hacks to power through</p>
+                        <h3>Stay Energized ⚡</h3>
+                        <p>Energy hacks to power through your day with ease.</p>
+                        <span class="read-more">Read Entry</span>
                     </div>
                 </div>
             </div>
@@ -142,13 +211,13 @@
     </div>
 
     <script>
-        // Add smooth hover effects
+        // Smooth hover transition for the cards
         document.querySelectorAll('.article-card').forEach(card => {
-            card.addEventListener('mouseover', function() {
-                this.style.boxShadow = '0 6px 12px rgba(0,0,0,0.15)';
+            card.addEventListener('mousedown', function() {
+                this.style.transform = 'scale(0.98)';
             });
-            card.addEventListener('mouseout', function() {
-                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+            card.addEventListener('mouseup', function() {
+                this.style.transform = 'translateY(-8px)';
             });
         });
     </script>
