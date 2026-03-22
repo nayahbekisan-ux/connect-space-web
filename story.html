@@ -6,7 +6,7 @@
   <title>Create Post | Connect Space</title>
   <style>
     /* --- CUTE & COZY THEME --- */
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
 
     body {
       font-family: 'Nunito', sans-serif;
@@ -33,15 +33,10 @@
     }
 
     .logo-circle {
-      width: 45px;
-      height: 45px;
-      background-color: #a3b18a; /* Sage Green */
-      border-radius: 15px; /* Squircle */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      object-fit: cover;
       margin-right: 15px;
       box-shadow: 0 4px 10px rgba(163, 177, 138, 0.3);
     }
@@ -137,7 +132,7 @@
 
     .post-btn.anonymous {
       background-color: #fdf0d5;
-      color: #bc6c25; /* Terracotta */
+      color: #bc6c25;
       box-shadow: 0 4px 0px #eaddcf;
     }
     .post-btn.anonymous:hover {
@@ -197,13 +192,63 @@
       margin-top: 10px;
       border: 3px solid #fdfaf5;
     }
+
+    /* --- NEW POST INTERACTION STYLES --- */
+    .post-interactions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed #f0e6d8;
+    }
+
+    .interaction-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: #8c7851;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .interaction-item:hover {
+      background-color: #fdfaf5;
+      color: #a3b18a;
+    }
+
+    .interaction-item.liked {
+      color: #e63946;
+    }
+
+    .interaction-item.liked svg {
+      fill: #e63946;
+    }
+
+    .interaction-item svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
     <div class="post-header">
       <button class="back-btn" onclick="history.back()">← Back</button>
-      <div class="logo-circle">CS</div>
+      <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" alt="CS Logo" class="logo-circle">
     </div>
 
     <textarea id="postText" placeholder="Share a thought, a win, or just say hi... ✨"></textarea>
@@ -211,7 +256,7 @@
     <div class="attachment-options">
       <button class="attachment-btn" onclick="document.getElementById('photo-input').click()">📸 Photo</button>
       <button class="attachment-btn" onclick="document.getElementById('video-input').click()">🎥 Video</button>
-      <button class="attachment-btn">☁️ Feeling</button>
+      <button class="attachment-btn" onclick="addFeeling()">☁️ Feeling</button>
       <input type="file" id="photo-input" accept="image/*" style="display:none">
       <input type="file" id="video-input" accept="video/*" style="display:none">
     </div>
@@ -219,8 +264,8 @@
     <div class="preview-area" id="preview" style="display:none; margin-bottom: 20px;"></div>
 
     <div class="actions">
-      <button class="post-btn anonymous" onclick="submitPost(true)">Post Privately</button>
-      <button class="post-btn primary" onclick="submitPost(false)">Share with Community</button>
+      <button class="post-btn anonymous" onclick="submitPost(true)">Post Anonymously</button>
+      <button class="post-btn primary" onclick="submitPost(false)">Post as Me</button>
     </div>
 
     <div class="feed" id="feed"></div>
@@ -256,12 +301,18 @@
       }
     });
 
+    function addFeeling() {
+      const feelings = ["✨ positive", "🌿 calm", "🚀 inspired", "😴 sleepy", "🌻 happy", "💪 motivated"];
+      const currentText = document.getElementById('postText').value;
+      const randomFeeling = feelings[Math.floor(Math.random() * feelings.length)];
+      document.getElementById('postText').value = currentText + " — feeling " + randomFeeling;
+    }
+
     function submitPost(isAnonymous) {
       const text = document.getElementById('postText').value.trim();
       const attachment = previewArea.innerHTML;
 
       if (!text && !attachment) {
-        alert("Your post is empty! Share a little something. ✨");
         return;
       }
 
@@ -269,6 +320,8 @@
         id: Date.now(),
         content: text,
         anonymous: isAnonymous,
+        likes: 0,
+        liked: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " · " + new Date().toLocaleDateString(),
         attachment: attachment
       };
@@ -291,6 +344,46 @@
       renderFeed();
     }
 
+    function handleLike(id) {
+      let posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
+      const post = posts.find(p => p.id === id);
+      if (post) {
+        post.liked = !post.liked;
+        post.likes = post.liked ? post.likes + 1 : post.likes - 1;
+        localStorage.setItem("connectPosts", JSON.stringify(posts));
+        renderFeed();
+      }
+    }
+
+    function handleShare(id) {
+      const post = JSON.parse(localStorage.getItem("connectPosts")).find(p => p.id === id);
+      const shareData = {
+        title: 'Connect Space Post',
+        text: post.content,
+        url: window.location.href
+      };
+      
+      try {
+        if (navigator.share) {
+          navigator.share(shareData);
+        } else {
+          const tempInput = document.createElement('input');
+          document.body.appendChild(tempInput);
+          tempInput.value = `Checkout this post on Connect Space: "${post.content}"`;
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+          
+          const shareBtn = document.querySelector(`[data-share-id="${id}"]`);
+          const originalText = shareBtn.innerHTML;
+          shareBtn.innerHTML = "Copied! ✨";
+          setTimeout(() => shareBtn.innerHTML = originalText, 2000);
+        }
+      } catch (err) {
+        console.error('Error sharing:', err);
+      }
+    }
+
     function renderFeed() {
       feed.innerHTML = '';
       const posts = JSON.parse(localStorage.getItem("connectPosts")) || [];
@@ -308,6 +401,20 @@
           <p><strong>${post.anonymous ? "👤 Someone kind" : "✨ You"}</strong></p>
           <p>${post.content}</p>
           ${post.attachment || ""}
+          <div class="post-interactions">
+            <button class="interaction-item ${post.liked ? 'liked' : ''}" onclick="handleLike(${post.id})">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              <span>${post.likes || 0}</span>
+            </button>
+            <button class="interaction-item" onclick="document.getElementById('postText').focus()">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              <span>Comment</span>
+            </button>
+            <button class="interaction-item" data-share-id="${post.id}" onclick="handleShare(${post.id})">
+              <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+              <span>Share</span>
+            </button>
+          </div>
           <div class="meta">${post.timestamp}</div>
         `;
         feed.appendChild(div);
