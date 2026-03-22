@@ -17,6 +17,7 @@
             --accent: #8c7851;
             --header-bg: #f3e9dc;
             --danger: #e07a5f;
+            --card-shadow: 0 10px 30px rgba(93, 87, 79, 0.05);
         }
 
         body {
@@ -51,13 +52,11 @@
             gap: 20px;
         }
 
-        .header-content {
-            z-index: 1;
-        }
+        .header-content { z-index: 1; }
 
         h1 {
             color: var(--accent);
-            font-size: clamp(2rem, 8vw, 3.5rem); /* Fluid typography */
+            font-size: clamp(2rem, 8vw, 3.5rem);
             margin: 0;
             font-weight: 800;
             line-height: 1.1;
@@ -70,8 +69,6 @@
             margin-top: 10px;
         }
 
-        /* --- AUTH & PROFILE UI --- */
-        /* Moved from absolute to relative/flex for better flow on mobile */
         .auth-controls {
             display: flex;
             gap: 12px;
@@ -80,22 +77,14 @@
             width: 100%;
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        /* Profile Area */
         .profile-container {
-            display: none; /* Hidden by default */
+            display: none;
             flex-direction: column;
             align-items: center;
             gap: 8px;
         }
 
-        .profile-container.show {
-            display: flex;
-        }
+        .profile-container.show { display: flex; }
 
         .profile-img {
             width: 60px;
@@ -108,27 +97,13 @@
             object-fit: cover;
         }
 
-        .profile-img:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
+        .profile-img:hover { transform: scale(1.1) rotate(5deg); }
 
-        /* Desktop specific positioning */
         @media (min-width: 768px) {
-            header {
-                padding: 60px 40px;
-                flex-direction: row;
-                justify-content: space-between;
-                text-align: left;
-            }
-            .header-content {
-                flex: 1;
-            }
-            .auth-controls {
-                width: auto;
-            }
-            .profile-container {
-                align-items: flex-end;
-            }
+            header { padding: 60px 40px; flex-direction: row; justify-content: space-between; text-align: left; }
+            .header-content { flex: 1; }
+            .auth-controls { width: auto; }
+            .profile-container { align-items: flex-end; }
         }
 
         /* --- BUTTONS --- */
@@ -146,26 +121,102 @@
             white-space: nowrap;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-            background-color: var(--primary-light);
-            box-shadow: 0 6px 0px var(--primary-dark);
+        button:hover { transform: translateY(-2px); background-color: var(--primary-light); box-shadow: 0 6px 0px var(--primary-dark); }
+        button:active { transform: translateY(2px); box-shadow: 0 0px 0px var(--primary-dark); }
+
+        .logout-btn { background-color: var(--danger); box-shadow: 0 3px 0px #c96a50; padding: 6px 14px; font-size: 12px; }
+
+        /* --- MOOD TRACKER & STATS --- */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
         }
 
-        button:active {
-            transform: translateY(2px);
-            box-shadow: 0 0px 0px var(--primary-dark);
+        .feature-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #f0e6d8;
         }
 
-        .logout-btn {
-            background-color: var(--danger);
-            box-shadow: 0 3px 0px #c96a50;
-            padding: 6px 14px;
-            font-size: 12px;
+        .mood-tracker {
+            background: #fdf0d5; 
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            border: 2px dashed #f1dca7;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        .logout-btn:hover { background-color: #f28482; box-shadow: 0 4px 0px #c96a50; }
 
-        /* Modals */
+        .mood-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .mood-btn {
+            font-size: 24px;
+            background: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 0 #e6d5b8;
+        }
+
+        #moodMotivation {
+            font-size: 0.95rem;
+            color: #8c7851;
+            font-style: italic;
+            min-height: 3em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.4);
+            border-radius: 15px;
+        }
+
+        .stats-panel {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(140, 120, 81, 0.2);
+            text-align: left;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+
+        .stat-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 10px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* --- MODALS --- */
         .modal {
             display: none;
             position: fixed;
@@ -180,70 +231,22 @@
 
         .modal-content {
             background: #fff;
-            margin: 15vh auto;
+            margin: 10vh auto;
             padding: 30px;
             width: 90%;
             max-width: 400px;
             border-radius: 30px;
             border: 6px solid var(--header-bg);
-            position: relative;
             box-sizing: border-box;
         }
 
         .modal-content input {
             width: 100%;
-            padding: 14px;
-            margin: 10px 0 20px 0;
+            padding: 12px;
+            margin: 8px 0 18px 0;
             border: 2px solid #f0e6d8;
             border-radius: 15px;
-            font-family: 'Nunito', sans-serif;
-            outline: none;
             box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        /* Content Sections */
-        .features-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .feature {
-            background-color: white;
-            padding: 25px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(93, 87, 79, 0.05);
-            border: 1px solid #f0e6d8;
-        }
-
-        .mood-tracker {
-            background: #fdf0d5; 
-            border-radius: 25px;
-            padding: 30px;
-            text-align: center;
-            border: 2px dashed #f1dca7;
-        }
-
-        .mood-options {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .mood-options button {
-            font-size: 28px;
-            background: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            width: 60px;
-            height: 60px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .planner-section {
@@ -252,29 +255,18 @@
             border-radius: 30px;
             border: 1px solid #f0e6d8;
             text-align: center;
+            box-shadow: var(--card-shadow);
         }
 
         .planner-img {
             width: 100%;
             max-width: 500px;
-            height: auto;
             border-radius: 20px;
             margin-bottom: 20px;
         }
 
-        .habit-checklist {
-            font-weight: 600;
-            accent-color: var(--primary);
-            text-align: left;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        
-        .habit-checklist label {
-            display: block;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
+        .habit-checklist { text-align: left; display: inline-block; }
+        .habit-checklist label { display: block; margin-bottom: 8px; font-weight: 600; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -286,77 +278,42 @@
             </div>
 
             <div class="auth-controls">
-                <!-- AUTH BUTTONS -->
                 <div class="auth-buttons" id="authButtonsContainer">
                     <button onclick="openModal('signinModal')">Sign In</button>
                     <button onclick="openModal('signupModal')">Sign Up</button>
                 </div>
 
-                <!-- PROFILE CONTAINER -->
                 <div class="profile-container" id="profileBtn">
                     <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" 
-                         alt="Profile" 
-                         class="profile-img" 
-                         onclick="window.location.href='profile.html'">
+                         alt="Profile" class="profile-img" onclick="window.location.href='profile.html'">
                     <button class="logout-btn" onclick="handleLogout()">Log Out</button>
                 </div>
             </div>
         </header>
 
-        <!-- SIGN IN MODAL -->
-        <div id="signinModal" class="modal">
-            <div class="modal-content">
-                <span style="float:right; cursor:pointer; font-size:28px;" onclick="closeModal('signinModal')">&times;</span>
-                <h3>Welcome Back! ☁️</h3>
-                <form onsubmit="event.preventDefault(); handleLogin();">
-                    <label>Email</label>
-                    <input type="email" placeholder="hello@bestie.com" required>
-                    <label>Password</label>
-                    <input type="password" placeholder="••••••••" required>
-                    <button type="submit" style="width:100%;">Let's Go!</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- SIGN UP MODAL -->
-        <div id="signupModal" class="modal">
-            <div class="modal-content">
-                <span style="float:right; cursor:pointer; font-size:28px;" onclick="closeModal('signupModal')">&times;</span>
-                <h3>Join the Club! 🌸</h3>
-                <form onsubmit="event.preventDefault(); handleLogin();">
-                    <label>Username</label>
-                    <input type="text" placeholder="WellnessWitch" required>
-                    <label>Email</label>
-                    <input type="email" placeholder="hello@bestie.com" required>
-                    <label>Password</label>
-                    <input type="password" placeholder="••••••••" required>
-                    <button type="submit" style="width:100%;">Create Account</button>
-                </form>
-            </div>
-        </div>
-
         <div class="features-section">
-            <div class="features-grid" style="display: grid; gap: 20px;">
-                <div class="feature">
-                    <button style="width:100%;" onclick="window.location.href='story.html'">📝 Share Your Story</button>
-                </div>
-                <div class="feature">
-                    <button style="width:100%;" onclick="window.location.href='articles.html'">📚 Explore Articles</button>
-                </div>
-                <div class="feature">
-                    <button style="width:100%;" onclick="window.location.href='community.html'">🫂 Join Community</button>
-                </div>
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div class="feature-card"><button style="width:100%;" onclick="window.location.href='story.html'">📝 Share Your Story</button></div>
+                <div class="feature-card"><button style="width:100%;" onclick="window.location.href='articles.html'">📚 Explore Articles</button></div>
+                <div class="feature-card"><button style="width:100%;" onclick="window.location.href='community.html'">🫂 Join Community</button></div>
             </div>
 
             <div class="mood-tracker">
-                <h3>How are you, Bestie?</h3>
+                <h3 style="margin:0;">How are you, Bestie?</h3>
                 <div class="mood-options">
-                    <button onclick="setMood('😊 Happy')">😊</button>
-                    <button onclick="setMood('😐 Neutral')">😐</button>
-                    <button onclick="setMood('😔 Sad')">😔</button>
-                    <button onclick="setMood('😤 Stressed')">😤</button>
+                    <button class="mood-btn" onclick="updateMood('happy')">😊</button>
+                    <button class="mood-btn" onclick="updateMood('neutral')">😐</button>
+                    <button class="mood-btn" onclick="updateMood('sad')">😔</button>
+                    <button class="mood-btn" onclick="updateMood('stressed')">😤</button>
                 </div>
-                <div id="moodResult" style="margin-top:20px; font-weight:800; color:#bc6c25;"></div>
+                
+                <div id="moodResult" style="font-weight:800; color:#bc6c25; min-height: 1.5em;">Tap an emoji!</div>
+                <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me! 🌸</div>
+
+                <div class="stats-panel">
+                    <strong style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Weekly Vibe Stats</strong>
+                    <div id="statsContainer"></div>
+                </div>
             </div>
         </div>
 
@@ -368,57 +325,92 @@
                 <label><input type="checkbox"> Meditate 🧘</label>
                 <label><input type="checkbox"> Stretch 🌸</label>
                 <label><input type="checkbox"> 8 hrs of sleep 😴</label>
-                <label><input type="checkbox"> Read my favorite book 📕</label>
             </div>
-            <div style="margin-top:25px;"><button>🔔 Set Reminders</button></div>
+            <div style="margin-top:20px;"><button>🔔 Set Reminders</button></div>
         </div>
     </div>
 
-    <script>
-        const authContainer = document.getElementById('authButtonsContainer');
-        const profileBtn = document.getElementById('profileBtn');
+    <!-- Modals (Sign In/Up) -->
+    <div id="signinModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signinModal')">&times;</span><h3>Welcome Back! ☁️</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Let's Go!</button></form></div></div>
+    <div id="signupModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signupModal')">&times;</span><h3>Join the Club! 🌸</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Username</label><input type="text" required><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Create Account</button></form></div></div>
 
-        window.onload = function() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (isLoggedIn === 'true') {
-                showProfileUI();
+    <script>
+        // Mood Data
+        const moodInfo = {
+            happy: { 
+                label: "Happy", 
+                emoji: "😊", 
+                note: "Keep that sunshine glowing! Your smile is contagious, bestie. ✨",
+                color: "#ffc300"
+            },
+            neutral: { 
+                label: "Neutral", 
+                emoji: "😐", 
+                note: "It's okay to just exist today. Finding peace in the middle is a superpower. ☁️",
+                color: "#a3b18a"
+            },
+            sad: { 
+                label: "Sad", 
+                emoji: "😔", 
+                note: "Sending you the biggest virtual hug. It's okay to not be okay. Rest your heart. 🌸",
+                color: "#4a90e2"
+            },
+            stressed: { 
+                label: "Stressed", 
+                emoji: "😤", 
+                note: "Breathe in... breathe out. You've handled 100% of your bad days so far. You got this! 🌿",
+                color: "#e07a5f"
             }
         };
 
-        function showProfileUI() {
-            authContainer.style.display = 'none';
-            profileBtn.classList.add('show');
+        // Initialize Stats from LocalStorage or Default
+        let moodStats = JSON.parse(localStorage.getItem('moodStats')) || { happy: 0, neutral: 0, sad: 0, stressed: 0 };
+
+        function updateMood(key) {
+            const mood = moodInfo[key];
+            moodStats[key]++;
+            localStorage.setItem('moodStats', JSON.stringify(moodStats));
+
+            // Update UI
+            document.getElementById('moodResult').textContent = `Current Vibe: ${mood.label} ${mood.emoji}`;
+            document.getElementById('moodMotivation').textContent = mood.note;
+            renderStats();
         }
 
-        function handleLogin() {
-            localStorage.setItem('isLoggedIn', 'true');
-            closeModal('signinModal');
-            closeModal('signupModal');
-            showProfileUI();
+        function renderStats() {
+            const container = document.getElementById('statsContainer');
+            const total = Object.values(moodStats).reduce((a, b) => a + b, 0) || 1;
+            
+            container.innerHTML = Object.entries(moodInfo).map(([key, info]) => {
+                const count = moodStats[key];
+                const percent = Math.round((count / total) * 100);
+                return `
+                    <div class="stat-row">
+                        <span>${info.emoji}</span>
+                        <div class="stat-bar-bg">
+                            <div class="stat-bar-fill" style="width: ${percent}%; background: ${info.color}"></div>
+                        </div>
+                        <span style="font-weight:800; min-width:30px;">${percent}%</span>
+                    </div>
+                `;
+            }).join('');
         }
 
-        function handleLogout() {
-            localStorage.removeItem('isLoggedIn');
-            location.reload();
-        }
+        // Auth Logic
+        function handleLogin() { localStorage.setItem('isLoggedIn', 'true'); location.reload(); }
+        function handleLogout() { localStorage.removeItem('isLoggedIn'); location.reload(); }
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        function openModal(id) {
-            document.getElementById(id).style.display = 'block';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-
-        function setMood(mood) {
-            document.getElementById('moodResult').textContent = "Current Vibe: " + mood;
-        }
-
-        window.onclick = function(event) {
-            if (event.target.className === 'modal') {
-                event.target.style.display = "none";
+        window.onload = function() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                document.getElementById('authButtonsContainer').style.display = 'none';
+                document.getElementById('profileBtn').classList.add('show');
             }
-        }
+            renderStats();
+        };
+
+        window.onclick = e => { if (e.target.className === 'modal') e.target.style.display = "none"; };
     </script>
 </body>
 </html>
