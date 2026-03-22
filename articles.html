@@ -23,19 +23,33 @@
             padding: 20px;
         }
 
+        /* --- UPDATED HEADER LAYOUT --- */
         header {
-            text-align: center;
             padding: 40px 20px;
             background-color: #f3e9dc;
             border-radius: 25px;
             margin-bottom: 30px;
-            position: relative;
             border: 2px dashed #eaddcf;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .header-top {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .header-content {
+            text-align: center;
         }
 
         h1 {
             color: #8c7851;
-            font-size: 2.5em;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
             font-weight: 800;
             margin: 0;
         }
@@ -43,27 +57,37 @@
         header p {
             color: #a69080;
             font-style: italic;
+            margin: 5px 0 0 0;
         }
 
-        /* --- CUTE BACK BUTTON --- */
+        /* --- CUTE BACK BUTTON (Fixed Position) --- */
         .back-btn {
-            position: absolute;
-            left: 20px;
-            top: 20px;
             background-color: #a3b18a;
             color: white;
             border: none;
-            padding: 8px 18px;
+            padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
+            font-family: 'Nunito', sans-serif;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 4px 0px #84936e;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 14px;
         }
 
         .back-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 0px #84936e;
+            background-color: #b5c49c;
+        }
+
+        .back-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 0px 0px #84936e;
         }
 
         /* --- ARTICLE CARDS --- */
@@ -147,14 +171,25 @@
             text-align: center;
             margin-bottom: 30px;
         }
+
+        @media (max-width: 600px) {
+            header { padding: 30px 15px; }
+            .header-top { justify-content: center; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <button class="back-btn" onclick="location.href='index.html'">← Home</button>
-            <h1>Wellness Articles</h1>
-            <p>Sparkly tips for a healthier you! ✨</p>
+            <div class="header-top">
+                <button class="back-btn" onclick="location.href='index.html'">
+                    <span>←</span> Home
+                </button>
+            </div>
+            <div class="header-content">
+                <h1>Wellness Articles</h1>
+                <p>Sparkly tips for a healthier you! ✨</p>
+            </div>
         </header>
 
         <div class="articles">
