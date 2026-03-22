@@ -71,7 +71,6 @@
             box-shadow: 0 0px 0px #84936e;
         }
 
-        /* Auth buttons */
         .auth-buttons {
             position: absolute;
             top: 25px;
@@ -85,13 +84,11 @@
             font-size: 13px;
         }
 
-        /* Profile button */
         .profile-button {
             position: absolute;
             top: 25px;
             right: 30px;
-            cursor: pointer;
-            display: none; /* Hidden by default */
+            display: none; 
         }
 
         .profile-button.show {
@@ -147,10 +144,6 @@
             box-sizing: border-box;
         }
 
-        .modal-content input:focus {
-            border-color: #a3b18a;
-        }
-
         /* Layout Sections */
         .features-section {
             display: flex;
@@ -174,6 +167,7 @@
             border: 1px solid #f0e6d8;
         }
 
+        /* --- UPDATED MOOD TRACKER STYLES --- */
         .mood-tracker {
             flex: 1;
             min-width: 300px;
@@ -182,6 +176,9 @@
             padding: 30px;
             text-align: center;
             border: 2px dashed #f1dca7;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .mood-options {
@@ -189,6 +186,7 @@
             justify-content: center;
             gap: 10px;
             margin-top: 15px;
+            margin-bottom: 20px;
         }
 
         .mood-options button {
@@ -204,9 +202,27 @@
         }
 
         .mood-result {
-            margin-top: 20px;
             font-weight: 800;
-            color: #bc6c25;
+            color: #8c7851;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .mood-motivation {
+            font-style: italic;
+            color: #5d574f;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .mood-stats {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 12px;
+            font-size: 0.85em;
+            color: #8c7851;
+            border: 1px solid #f1dca7;
         }
 
         /* Planner */
@@ -246,15 +262,13 @@
     <div class="container">
         <header>
             <h1>Connect Space</h1>
-            <p class="tagline">Your pathway to wellness ✨</p>
+            <p class="tagline">Your cute pathway to wellness ✨</p>
 
-            <!-- AUTH BUTTONS -->
             <div class="auth-buttons" id="authButtonsContainer">
                 <button onclick="openModal('signinModal')">Sign In</button>
                 <button onclick="openModal('signupModal')">Sign Up</button>
             </div>
 
-            <!-- PROFILE BUTTON (Hidden by default) -->
             <div class="profile-button" id="profileBtn">
                 <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
                     <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" 
@@ -266,7 +280,6 @@
             </div>
         </header>
 
-        <!-- SIGN IN MODAL -->
         <div id="signinModal" class="modal">
             <div class="modal-content">
                 <span style="float:right; cursor:pointer; font-size:24px;" onclick="closeModal('signinModal')">&times;</span>
@@ -279,7 +292,6 @@
             </div>
         </div>
 
-        <!-- SIGN UP MODAL -->
         <div id="signupModal" class="modal">
             <div class="modal-content">
                 <span style="float:right; cursor:pointer; font-size:24px;" onclick="closeModal('signupModal')">&times;</span>
@@ -294,27 +306,31 @@
         </div>
 
         <div class="features-section">
-<div class="features">
-  <div class="feature">
-    <a href="story.html"><button style="width:100%;">📝 Share Your Story</button></a>
-  </div>
-  <div class="feature">
-    <a href="articles.html"><button style="width:100%;">📚 Explore Articles</button></a>
-  </div>
-  <div class="feature">
-    <a href="community.html"><button style="width:100%;">🫂 Join Community</button></a>
-  </div>
-</div>
+            <div class="features">
+                <div class="feature">
+                    <a href="story.html"><button style="width:100%;">📝 Share Your Story</button></a>
+                </div>
+                <div class="feature">
+                    <a href="articles.html"><button style="width:100%;">📚 Explore Articles</button></a>
+                </div>
+                <div class="feature">
+                    <a href="community.html"><button style="width:100%;">🫂 Join Community</button></a>
+                </div>
+            </div>
 
             <div class="mood-tracker">
                 <h3>How are you, Bestie?</h3>
                 <div class="mood-options">
-                    <button onclick="setMood('😊 Happy')">😊</button>
-                    <button onclick="setMood('😐 Neutral')">😐</button>
-                    <button onclick="setMood('😔 Sad')">😔</button>
-                    <button onclick="setMood('😤 Stressed')">😤</button>
+                    <button onclick="setMood('Happy')">😊</button>
+                    <button onclick="setMood('Neutral')">😐</button>
+                    <button onclick="setMood('Sad')">😔</button>
+                    <button onclick="setMood('Stressed')">😤</button>
                 </div>
-                <div class="mood-result" id="moodResult"></div>
+                <div id="moodDisplayArea" style="display:none;">
+                    <div class="mood-result" id="moodResult"></div>
+                    <div class="mood-motivation" id="moodMotivation"></div>
+                    <div class="mood-stats" id="moodStats"></div>
+                </div>
             </div>
         </div>
 
@@ -332,11 +348,21 @@
         </div>
 
         <script>
-            // Elements
+            // State
             const authContainer = document.getElementById('authButtonsContainer');
             const profileBtn = document.getElementById('profileBtn');
+            
+            // Mood Logic Constants
+            const quotes = {
+                'Happy': "Your smile makes the world brighter! Spread that magic, bestie. ✨",
+                'Neutral': "A calm heart is a creative heart. Enjoy the peace of today. 🌿",
+                'Sad': "It's okay to feel rainy. Remember, flowers need rain to grow. 🌧️💖",
+                'Stressed': "Inhale peace, exhale worry. You are stronger than this moment. ☁️"
+            };
 
-            // --- CHECK LOGIN STATE ON LOAD ---
+            // Initial Mock Data for Statistics
+            let weeklyMoods = ['Happy', 'Happy', 'Neutral', 'Happy', 'Neutral', 'Stressed'];
+
             window.onload = function() {
                 const isLoggedIn = localStorage.getItem('isLoggedIn');
                 if (isLoggedIn === 'true') {
@@ -350,20 +376,15 @@
             }
 
             function handleLogin() {
-                // Save login state to localStorage
                 localStorage.setItem('isLoggedIn', 'true');
-                
-                // Hide modals
                 closeModal('signinModal');
                 closeModal('signupModal');
-                
-                // Switch UI
                 showProfileUI();
             }
 
             function handleLogout() {
                 localStorage.removeItem('isLoggedIn');
-                location.reload(); // Refresh to reset UI
+                location.reload();
             }
 
             function openModal(id) {
@@ -375,10 +396,31 @@
             }
 
             function setMood(mood) {
-                document.getElementById('moodResult').textContent = "Current Vibe: " + mood;
+                // Add to history
+                weeklyMoods.push(mood);
+                if(weeklyMoods.length > 7) weeklyMoods.shift(); // Keep last 7
+
+                // Update UI
+                const displayArea = document.getElementById('moodDisplayArea');
+                const result = document.getElementById('moodResult');
+                const motivation = document.getElementById('moodMotivation');
+                const stats = document.getElementById('moodStats');
+
+                displayArea.style.display = 'block';
+                result.textContent = "Today's Vibe: " + mood;
+                motivation.textContent = quotes[mood];
+
+                // Calculate Statistics
+                const counts = {};
+                weeklyMoods.forEach(m => counts[m] = (counts[m] || 0) + 1);
+                
+                // Find most frequent mood
+                let mostCommon = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+                let percentage = Math.round((counts['Happy'] || 0) / weeklyMoods.length * 100);
+
+                stats.innerHTML = `📊 <strong>Weekly Vibe:</strong> Most common mood: ${mostCommon}. <br> You've been Happy ${percentage}% of the week!`;
             }
 
-            // Close modal if user clicks outside of it
             window.onclick = function(event) {
                 if (event.target.className === 'modal') {
                     event.target.style.display = "none";
