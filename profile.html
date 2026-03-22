@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f8ff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .profile-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    /* Back arrow */
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 20px;
+      text-decoration: none;
+      color: #4a90e2;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .back-btn:hover {
+      color: #3a7bc8;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    /* Avatar */
+    .avatar {
+      text-align: center;
+    }
+    .avatar img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid transparent;
+      background-image: linear-gradient(135deg, #4a90e2, #3a7bc8, #2a6496, #5a8bb5);
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      padding: 4px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .avatar img:hover {
+      transform: scale(1.1);
+    }
+    .upload-btn {
+      margin-top: 10px;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .upload-btn:hover {
+      background-color: #3a7bc8;
+    }
+
+    /* Info section */
+    .profile-info {
+      flex: 1;
+    }
+
+    .username {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .username h2 {
+      margin: 0;
+      color: #2a6496;
+    }
+    .edit-btn {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .edit-btn:hover {
+      background-color: #3a7bc8;
+    }
+
+    .stats {
+      display: flex;
+      gap: 30px;
+      margin: 15px 0;
+    }
+    .stat h3 {
+      margin: 0;
+      color: #2a6496;
+    }
+    .stat p {
+      margin: 0;
+      color: #5a8bb5;
+    }
+
+    .bio {
+      background: #e6f7ff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 10px;
+      position: relative;
+    }
+    .bio p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Posts section */
+    .posts {
+      margin-top: 30px;
+    }
+    .posts h3 {
+      color: #2a6496;
+      margin-bottom: 15px;
+    }
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .post {
+      background: #e6f7ff;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <a href="index.html" class="back-btn">← Back</a>
+
+    
+    <div class="profile-header">
+      <!-- Avatar -->
+      <div class="avatar">
+        <img id="profile-pic" src="https://placehold.net/avatar-4.png" alt="User Avatar">
+        <input type="file" id="upload" accept="image/*" style="display:none;">
+        <button class="upload-btn" onclick="document.getElementById('upload').click()">Change Picture</button>
+      </div>
+
+      <!-- Info -->
+      <div class="profile-info">
+        <div class="username">
+          <h2 id="username">Temporary User</h2>
+          <button class="edit-btn" onclick="editUsername()">✒️</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <h3>0</h3>
+            <p>Followers</p>
+          </div>
+          <div class="stat">
+            <h3>1</h3>
+            <p>Following</p>
+          </div>
+          <div class="stat">
+            <h3>120</h3>
+            <p>Posts</p>
+          </div>
+        </div>
+
+        <div class="bio">
+          <p id="bio-text">This is your bio. Click edit to customize it.</p>
+          <button class="edit-btn" onclick="editBio()">...</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Posts -->
+    <div class="posts">
+      <h3>Your Posts</h3>
+      <div class="post-grid">
+        <div class="post">Post 1 content...</div>
+        <div class="post">Post 2 content...</div>
+        <div class="post">Post 3 content...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const uploadInput = document.getElementById('upload');
+    const profilePic = document.getElementById('profile-pic');
+
+    uploadInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          profilePic.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function editUsername() {
+      const newName = prompt("Enter new username:", document.getElementById('username').innerText);
+      if (newName) {
+        document.getElementById('username').innerText = newName;
+      }
+    }
+
+    function editBio() {
+      const newBio = prompt("Edit your bio:", document.getElementById('bio-text').innerText);
+      if (newBio) {
+        document.getElementById('bio-text').innerText = newBio;
+      }
+    }
+  </script>
+</body>
+</html>
