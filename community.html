@@ -103,6 +103,7 @@
             color: #8c7851;
             font-weight: 800;
             margin-top: 0;
+            text-align: center;
         }
 
         .card-grid {
@@ -166,28 +167,36 @@
             box-shadow: 0 0px 0px #84936e;
         }
 
-        /* --- CALENDAR --- */
+        /* --- CENTERED CALENDAR FIX --- */
+        .calendar-container {
+            width: 100%;
+            overflow-x: auto; /* Scroll for very small screens */
+        }
+
         .calendar-view {
             width: 100%;
+            table-layout: fixed; /* Ensures all cells are exactly equal width */
             border-collapse: separate;
-            border-spacing: 5px;
-            margin-top: 15px;
+            border-spacing: 8px;
+            margin: 15px auto 0;
         }
 
         .calendar-view th {
             color: #8c7851;
             padding: 10px;
             font-weight: 800;
+            text-align: center;
         }
 
         .calendar-view td {
             background-color: #faf9f7;
             border-radius: 12px;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
             border: 1px solid #f0e6d8;
-            height: 60px;
+            height: 70px;
             vertical-align: top;
+            font-weight: 600;
         }
 
         .event-day {
@@ -201,15 +210,19 @@
             font-size: 0.7em;
             color: #8c7851;
             font-weight: 600;
-            margin-top: 4px;
-            background: rgba(255,255,255,0.5);
-            border-radius: 4px;
-            padding: 2px;
+            margin-top: 6px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 6px;
+            padding: 4px 2px;
+            display: block;
+            line-height: 1.2;
         }
 
         @media (max-width: 600px) {
             header { padding: 30px 15px; }
             .header-top { justify-content: center; }
+            .calendar-view { border-spacing: 4px; }
+            .calendar-view td { padding: 5px; height: 60px; font-size: 0.9em; }
         }
     </style>
 </head>
@@ -275,24 +288,30 @@
 
         <div class="section">
             <h2>Community Calendar ☁️</h2>
-            <table class="calendar-view">
-                <tr>
-                    <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
-                </tr>
-                <tr>
-                    <td>4</td><td>5</td><td>6</td><td>7</td>
-                    <td class="event-day">8 <div class="event-label">Yoga Flow</div></td>
-                    <td>9</td>
-                    <td class="event-day">10 <div class="event-label">Fun Run</div></td>
-                </tr>
-                <tr>
-                    <td>11</td><td>12</td>
-                    <td class="event-day">13 <div class="event-label">Tea & Zen</div></td>
-                    <td>14</td>
-                    <td class="event-day">15 <div class="event-label">Workshop</div></td>
-                    <td>16</td><td>17</td>
-                </tr>
-            </table>
+            <div class="calendar-container">
+                <table class="calendar-view">
+                    <thead>
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>4</td><td>5</td><td>6</td><td>7</td>
+                            <td class="event-day">8 <div class="event-label">Yoga Flow</div></td>
+                            <td>9</td>
+                            <td class="event-day">10 <div class="event-label">Fun Run</div></td>
+                        </tr>
+                        <tr>
+                            <td>11</td><td>12</td>
+                            <td class="event-day">13 <div class="event-label">Tea & Zen</div></td>
+                            <td>14</td>
+                            <td class="event-day">15 <div class="event-label">Workshop</div></td>
+                            <td>16</td><td>17</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
