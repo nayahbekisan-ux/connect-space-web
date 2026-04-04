@@ -251,11 +251,11 @@
       <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" alt="CS Logo" class="logo-circle">
     </div>
 
-    <textarea id="postText" placeholder="Share a thought, a win, or just say hi... ✨"></textarea>
+    <textarea id="postText" placeholder="Share a thought, a win, or just say hi... "></textarea>
 
     <div class="attachment-options">
-      <button class="attachment-btn" onclick="document.getElementById('photo-input').click()">📸 Photo</button>
-      <button class="attachment-btn" onclick="document.getElementById('video-input').click()">🎥 Video</button>
+      <button class="attachment-btn" onclick="document.getElementById('photo-input').click()"> Photo</button>
+      <button class="attachment-btn" onclick="document.getElementById('video-input').click()"> Video</button>
       <button class="attachment-btn" onclick="addFeeling()">☁️ Feeling</button>
       <input type="file" id="photo-input" accept="image/*" style="display:none">
       <input type="file" id="video-input" accept="video/*" style="display:none">
@@ -398,7 +398,7 @@
         div.className = "post";
         div.innerHTML = `
           <button class="delete-btn" onclick="deletePost(${post.id})">Remove</button>
-          <p><strong>${post.anonymous ? "👤 Someone kind" : "✨ You"}</strong></p>
+          <p><strong>${post.anonymous ? "👤 Someone kind" : "You"}</strong></p>
           <p>${post.content}</p>
           ${post.attachment || ""}
           <div class="post-interactions">
