@@ -20,6 +20,10 @@
             --card-shadow: 0 10px 30px rgba(93, 87, 79, 0.05);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
             background-color: var(--bg);
@@ -31,67 +35,75 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 15px;
+            padding: 20px;
         }
 
         /* --- RESPONSIVE HEADER --- */
         header {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: var(--header-bg);
-            border-radius: 30px;
-            margin-bottom: 30px;
-            position: relative;
-            border: 2px dashed #eaddcf;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            padding: 30px 40px;
+            background-color: var(--header-bg);
+            border-radius: 24px;
+            margin-bottom: 30px;
+            border: 2px dashed #eaddcf;
             gap: 20px;
+            text-align: center;
         }
 
-        .header-content { z-index: 1; }
+        .header-content { 
+            flex: 1; 
+        }
 
         h1 {
             color: var(--accent);
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
             margin: 0;
             font-weight: 800;
-            line-height: 1.1;
+            line-height: 1.2;
         }
 
         .tagline {
             color: #a69080;
             font-style: italic;
             font-size: 1.1em;
-            margin-top: 10px;
+            margin: 5px 0 10px 0;
+        }
+
+        .intro-paragraph {
+            max-width: 700px;
+            margin: 15px auto 0 auto;
+            color: var(--text);
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         .auth-controls {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
             align-items: center;
-            width: 100%;
         }
 
         .profile-container {
             display: none;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            gap: 8px;
+            gap: 15px;
         }
 
         .profile-container.show { display: flex; }
 
         .profile-img {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             cursor: pointer;
             transition: transform 0.3s;
             object-fit: cover;
@@ -100,10 +112,82 @@
         .profile-img:hover { transform: scale(1.1) rotate(5deg); }
 
         @media (min-width: 768px) {
-            header { padding: 60px 40px; flex-direction: row; justify-content: space-between; text-align: left; }
-            .header-content { flex: 1; }
-            .auth-controls { width: auto; }
-            .profile-container { align-items: flex-end; }
+            header { 
+                flex-direction: row; 
+                text-align: left; 
+            }
+            .intro-paragraph {
+                margin: 15px 0 0 0;
+            }
+            .auth-controls { justify-content: flex-end; }
+        }
+
+        /* --- DASHBOARD WITH SIDEBAR --- */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 992px) {
+            .main-layout {
+                grid-template-columns: 200px 1fr; /* Sidebar width */
+            }
+        }
+
+        /* --- SIDEBAR BUTTONS --- */
+        .sidebar {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 992px) {
+            .sidebar {
+                flex-direction: column;
+                justify-content: flex-start;
+                position: sticky;
+                top: 20px;
+            }
+        }
+
+        .side-btn {
+            background-color: white;
+            color: var(--accent);
+            border: 1px solid #f0e6d8;
+            padding: 15px;
+            border-radius: 18px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .side-btn:hover {
+            background-color: var(--header-bg);
+            transform: translateX(5px);
+            border-color: var(--accent);
+        }
+
+        .side-btn.donate {
+            background-color: #fce4dc;
+            border-color: #f3cdc1;
+            color: var(--danger);
+        }
+
+        .side-btn.donate:hover {
+            background-color: var(--danger);
+            color: white;
+            transform: translateX(5px);
         }
 
         /* --- BUTTONS --- */
@@ -124,52 +208,88 @@
         button:hover { transform: translateY(-2px); background-color: var(--primary-light); box-shadow: 0 6px 0px var(--primary-dark); }
         button:active { transform: translateY(2px); box-shadow: 0 0px 0px var(--primary-dark); }
 
-        .logout-btn { background-color: var(--danger); box-shadow: 0 3px 0px #c96a50; padding: 6px 14px; font-size: 12px; }
+        .logout-btn { background-color: var(--danger); box-shadow: 0 3px 0px #c96a50; padding: 8px 16px; font-size: 13px; }
 
-        /* --- FEATURE CARDS --- */
-        .features-section {
+        /* --- DASHBOARD GRID --- */
+        .dashboard-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .features-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .feature-card {
+        .feature-card-btn {
+            width: 100%;
+            padding: 20px;
+            font-size: 17px;
             background-color: white;
-            padding: 25px;
-            border-radius: 25px;
-            box-shadow: var(--card-shadow);
+            color: var(--text);
             border: 1px solid #f0e6d8;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
+        .feature-card-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 6px 15px rgba(163, 177, 138, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* --- MAIN PANELS (MOOD & PLANNER) --- */
+        .main-panels {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 1100px) {
+            .main-panels {
+                grid-template-columns: 350px 1fr;
+                align-items: start;
+            }
+        }
+
+        /* --- MOOD TRACKER --- */
         .mood-tracker {
             background: #fdf0d5; 
             border-radius: 25px;
-            padding: 25px;
+            padding: 30px;
             text-align: center;
             border: 2px dashed #f1dca7;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
+            height: 100%;
         }
 
         .mood-options {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .mood-btn {
-            font-size: 24px;
+            font-size: 26px;
             background: white;
-            width: 55px;
-            height: 55px;
-            border-radius: 15px;
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 0 #e6d5b8;
+            padding: 0;
         }
 
         #moodMotivation {
@@ -180,14 +300,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
-            background: rgba(255,255,255,0.4);
+            padding: 15px;
+            background: rgba(255,255,255,0.5);
             border-radius: 15px;
         }
 
         .stats-panel {
-            margin-top: 15px;
-            padding-top: 15px;
+            margin-top: auto;
+            padding-top: 20px;
             border-top: 1px solid rgba(140, 120, 81, 0.2);
             text-align: left;
         }
@@ -196,7 +316,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-top: 10px;
             font-size: 0.85rem;
         }
 
@@ -205,7 +325,7 @@
             height: 8px;
             background: #eee;
             border-radius: 10px;
-            margin: 0 10px;
+            margin: 0 15px;
             overflow: hidden;
         }
 
@@ -216,42 +336,48 @@
             transition: width 0.5s ease;
         }
 
-        /* --- HABIT PLANNER (NEW & UPDATED) --- */
-        .planner-section {
+        /* --- HABIT PLANNER --- */
+        .planner-card {
             background: white;
-            padding: 40px 20px;
-            border-radius: 30px;
+            border-radius: 25px;
             border: 1px solid #f0e6d8;
-            text-align: center;
             box-shadow: var(--card-shadow);
-        }
-
-        .planner-container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 30px;
+            overflow: hidden;
         }
 
         @media (min-width: 768px) {
-            .planner-container { flex-direction: row; align-items: flex-start; justify-content: center; }
+            .planner-card {
+                flex-direction: row;
+            }
+        }
+
+        .planner-image-container {
+            flex: 0 0 35%;
+            background: #faf7f2;
         }
 
         .planner-img {
             width: 100%;
-            max-width: 400px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .planner-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
         }
 
         .habit-checklist-wrapper {
-            flex: 1;
-            max-width: 450px;
-            text-align: left;
             background: #faf7f2;
             padding: 25px;
             border-radius: 20px;
             border: 2px solid #f3e9dc;
+            flex: 1;
         }
 
         .habit-list {
@@ -264,19 +390,18 @@
             display: flex;
             align-items: center;
             background: white;
-            padding: 12px 15px;
-            border-radius: 12px;
-            margin-bottom: 10px;
+            padding: 12px 18px;
+            border-radius: 15px;
+            margin-bottom: 12px;
             transition: transform 0.2s;
             border-left: 5px solid var(--primary);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-
-        .habit-item:hover { transform: translateX(5px); }
 
         .habit-item input[type="checkbox"] {
             margin-right: 15px;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
             accent-color: var(--primary);
         }
@@ -292,48 +417,28 @@
             color: #b5c49c;
         }
 
-        .delete-habit {
-            background: none;
-            box-shadow: none;
-            color: #ccc;
-            padding: 5px;
-            font-size: 18px;
-        }
-
-        .delete-habit:hover {
-            color: var(--danger);
-            background: none;
-            box-shadow: none;
-            transform: scale(1.2);
-        }
-
         .add-habit-form {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             margin-top: 20px;
         }
 
         .add-habit-form input {
             flex: 1;
-            padding: 12px 15px;
+            padding: 14px 18px;
             border: 2px solid #eee;
             border-radius: 15px;
             font-family: inherit;
         }
 
-        .add-habit-form input:focus {
-            outline: none;
-            border-color: var(--primary-light);
-        }
-
         .add-habit-btn {
-            padding: 12px;
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 24px;
+            flex-shrink: 0;
         }
 
         /* --- MODALS --- */
@@ -352,31 +457,25 @@
         .modal-content {
             background: #fff;
             margin: 10vh auto;
-            padding: 30px;
+            padding: 40px;
             width: 90%;
             max-width: 400px;
             border-radius: 30px;
             border: 6px solid var(--header-bg);
-            box-sizing: border-box;
-        }
-
-        .modal-content input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0 18px 0;
-            border: 2px solid #f0e6d8;
-            border-radius: 15px;
-            box-sizing: border-box;
         }
 
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- HEADER -->
         <header>
             <div class="header-content">
                 <h1>Connect Space</h1>
                 <p class="tagline">⋆ 𐙚 ̊Your pathway to wellness˚˖𓍢ִ໋❀</p>
+                <p class="intro-paragraph">
+                    Dedicated to empowering wellness worldwide through shared experiences, supportive connections, and mindful daily habits. We believe in creating a safe harbor for your mental and physical glow-up. 🌿
+                </p>
             </div>
 
             <div class="auth-controls">
@@ -386,76 +485,103 @@
                 </div>
 
                 <div class="profile-container" id="profileBtn">
+                    <button class="logout-btn" onclick="handleLogout()">Log Out</button>
                     <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" 
                          alt="Profile" class="profile-img" onclick="window.location.href='profile.html'">
-                    <button class="logout-btn" onclick="handleLogout()">Log Out</button>
                 </div>
             </div>
         </header>
 
-        <div class="features-section">
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-                <div class="feature-card"><button style="width:100%;" onclick="window.location.href='story.html'">📝 Share Your Story</button></div>
-                <div class="feature-card"><button style="width:100%;" onclick="window.location.href='articles.html'">📚 Explore Articles</button></div>
-                <div class="feature-card"><button style="width:100%;" onclick="window.location.href='community.html'">🫂 Join Community</button></div>
-            </div>
-
-            <div class="mood-tracker">
-                <h3 style="margin:0;">How are you, Bestie?</h3>
-                <div class="mood-options">
-                    <button class="mood-btn" onclick="updateMood('happy')">😊</button>
-                    <button class="mood-btn" onclick="updateMood('neutral')">😐</button>
-                    <button class="mood-btn" onclick="updateMood('sad')">😔</button>
-                    <button class="mood-btn" onclick="updateMood('stressed')">😤</button>
+        <div class="main-layout">
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <div class="side-btn" onclick="window.location.href='about.html'">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span>About Us</span>
                 </div>
-                
-                <div id="moodResult" style="font-weight:800; color:#bc6c25; min-height: 1.5em;">Tap an emoji!</div>
-                <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me! 🌸</div>
-
-                <div class="stats-panel">
-                    <strong style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Weekly Vibe Stats</strong>
-                    <div id="statsContainer"></div>
+                <div class="side-btn donate" onclick="openModal('donateModal')">
+                    <span style="font-size: 1.5rem;"></span>
+                    <span>Donate</span>
                 </div>
-            </div>
-        </div>
+            </aside>
 
-        <div class="planner-section">
-            <h2 style="color: var(--accent); margin-bottom: 30px;">Daily Glow-Up Habits ✨</h2>
-            <div class="planner-container">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwHdG9pWo-k3yugKlmKj4VInwxdD18qGxVlw&s" class="planner-img" alt="Planner">
-                
-                <div class="habit-checklist-wrapper">
-                    <h4 style="margin: 0 0 10px 0;">My Checklist</h4>
-                    <p style="font-size: 0.85rem; color: #a69080; margin: 0;">Check off your habits as you complete them!</p>
-                    
-                    <ul class="habit-list" id="habitList">
-                        <!-- Habits will be injected here -->
-                    </ul>
+            <!-- DASHBOARD CONTENT -->
+            <div class="dashboard-content">
+                <!-- TOP FEATURES ROW -->
+                <div class="features-row">
+                    <button class="feature-card-btn" onclick="window.location.href='story.html'">📝 Share Story</button>
+                    <button class="feature-card-btn" onclick="window.location.href='articles.html'">📚 Articles</button>
+                    <button class="feature-card-btn" onclick="window.location.href='community.html'">🫂 Community</button>
+                </div>
 
-                    <form class="add-habit-form" onsubmit="handleAddHabit(event)">
-                        <input type="text" id="habitInput" placeholder="Add a new goal..." maxlength="30" required>
-                        <button type="submit" class="add-habit-btn">+</button>
-                    </form>
+                <!-- MAIN CONTENT PANELS -->
+                <div class="main-panels">
                     
-                    <div style="margin-top:20px; text-align: center;">
-                        <button style="font-size: 13px; padding: 10px 20px;" onclick="setReminders()">🔔 Set Reminders</button>
+                    <!-- MOOD TRACKER -->
+                    <div class="mood-tracker">
+                        <h3 style="margin:0; color: var(--accent);">How are you, Bestie?</h3>
+                        <div class="mood-options">
+                            <button class="mood-btn" onclick="updateMood('happy')">😊</button>
+                            <button class="mood-btn" onclick="updateMood('neutral')">😐</button>
+                            <button class="mood-btn" onclick="updateMood('sad')">😔</button>
+                            <button class="mood-btn" onclick="updateMood('stressed')">😤</button>
+                        </div>
+                        
+                        <div id="moodResult" style="font-weight:800; color:#bc6c25; min-height: 1.5em; margin-top: 10px;">Tap an emoji!</div>
+                        <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me!</div>
+
+                        <div class="stats-panel">
+                            <strong style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent);">Weekly Vibe Stats</strong>
+                            <div id="statsContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- HABIT PLANNER -->
+                    <div class="planner-card">
+                        <div class="planner-image-container">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwHdG9pWo-k3yugKlmKj4VInwxdD18qGxVlw&s" class="planner-img" alt="Planner">
+                        </div>
+                        
+                        <div class="planner-content">
+                            <h2 style="color: var(--accent); margin: 0 0 20px 0;">Daily Glow-Up</h2>
+                            
+                            <div class="habit-checklist-wrapper">
+                                <h4 style="margin: 0 0 5px 0;">My Checklist</h4>
+                                
+                                <ul class="habit-list" id="habitList">
+                                    <!-- Habits injected here -->
+                                </ul>
+
+                                <form class="add-habit-form" onsubmit="handleAddHabit(event)">
+                                    <input type="text" id="habitInput" placeholder="New goal..." maxlength="30" required>
+                                    <button type="submit" class="add-habit-btn">+</button>
+                                </form>
+                                
+                                <div style="margin-top:20px;">
+                                    <button style="font-size: 14px; width: 100%;" onclick="setReminders()">🔔 Set Reminders</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modals (Sign In/Up) -->
-    <div id="signinModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signinModal')">&times;</span><h3>Welcome Back! ☁️</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Let's Go!</button></form></div></div>
-    <div id="signupModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signupModal')">&times;</span><h3>Join the Club! 🌸</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Username</label><input type="text" required><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Create Account</button></form></div></div>
+    <!-- Modals -->
+    <div id="signinModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signinModal')">&times;</span><h3>Welcome Back! </h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Let's Go!</button></form></div></div>
+    
+    <div id="signupModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signupModal')">&times;</span><h3>Join the Club! </h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Username</label><input type="text" required><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Create Account</button></form></div></div>
+
+    <div id="donateModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('donateModal')">&times;</span><h3 style="color: var(--danger);">Support Our Mission 💝</h3><p>Your contributions help us keep Connect Space free and accessible for everyone seeking wellness.</p><div style="display: flex; gap: 10px; margin-top: 20px;"><button style="flex: 1;">$5</button><button style="flex: 1;">$10</button><button style="flex: 1; background-color: var(--accent);">Custom</button></div></div></div>
 
     <script>
-        // --- MOOD LOGIC ---
+        // MOOD LOGIC
         const moodInfo = {
-            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! Your smile is contagious, bestie. ✨", color: "#ffc300" },
-            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. Finding peace in the middle is a superpower. ☁️", color: "#a3b18a" },
-            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. It's okay to not be okay. Rest your heart. 🌸", color: "#4a90e2" },
-            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. You've handled 100% of your bad days so far. You got this! 🌿", color: "#e07a5f" }
+            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! Your smile is contagious, bestie. ", color: "#ffc300" },
+            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. Finding peace in the middle is a superpower. ", color: "#a3b18a" },
+            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. It's okay to not be okay. Rest your heart. ", color: "#4a90e2" },
+            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. You've handled 100% of your bad days so far. You got this! ", color: "#e07a5f" }
         };
 
         let moodStats = JSON.parse(localStorage.getItem('moodStats')) || { happy: 0, neutral: 0, sad: 0, stressed: 0 };
@@ -478,28 +604,25 @@
                 return `
                     <div class="stat-row">
                         <span>${info.emoji}</span>
-                        <div class="stat-bar-bg">
-                            <div class="stat-bar-fill" style="width: ${percent}%; background: ${info.color}"></div>
-                        </div>
-                        <span style="font-weight:800; min-width:30px;">${percent}%</span>
+                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percent}%; background: ${info.color}"></div></div>
+                        <span style="font-weight:800; color: var(--accent);">${percent}%</span>
                     </div>
                 `;
             }).join('');
         }
 
-        // --- HABIT CHECKLIST LOGIC ---
+        // HABIT LOGIC
         let habits = JSON.parse(localStorage.getItem('habits')) || [
-            { text: "Drink water 💧", completed: false },
-            { text: "Stretch 🌸", completed: false },
-            { text: "Meditate 🧘", completed: false }
+            { text: "Drink water ", completed: false },
+            { text: "Stretch ", completed: false },
+            { text: "Meditate ", completed: false }
         ];
 
         function handleAddHabit(e) {
             e.preventDefault();
             const input = document.getElementById('habitInput');
-            const text = input.value.trim();
-            if (text) {
-                habits.push({ text, completed: false });
+            if (input.value.trim()) {
+                habits.push({ text: input.value.trim(), completed: false });
                 input.value = '';
                 saveAndRenderHabits();
             }
@@ -507,11 +630,6 @@
 
         function toggleHabit(index) {
             habits[index].completed = !habits[index].completed;
-            saveAndRenderHabits();
-        }
-
-        function deleteHabit(index) {
-            habits.splice(index, 1);
             saveAndRenderHabits();
         }
 
@@ -526,26 +644,25 @@
                 <li class="habit-item ${habit.completed ? 'completed' : ''}">
                     <input type="checkbox" ${habit.completed ? 'checked' : ''} onchange="toggleHabit(${index})">
                     <span>${habit.text}</span>
-                    <button class="delete-habit" onclick="deleteHabit(${index})">&times;</button>
                 </li>
             `).join('');
         }
 
         function setReminders() {
-            const customMsg = document.createElement('div');
-            customMsg.style = "position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 15px 30px; border-radius: 50px; z-index: 2000; box-shadow: 0 5px 15px rgba(0,0,0,0.2);";
-            customMsg.textContent = "Reminders set for your glow-up! 🌿";
-            document.body.appendChild(customMsg);
-            setTimeout(() => customMsg.remove(), 3000);
+            const msg = document.createElement('div');
+            msg.style = "position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; font-weight: bold;";
+            msg.textContent = "Reminders set for your glow-up!";
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 2500);
         }
 
-        // --- AUTH & INITIALIZATION ---
+        // AUTH & INIT
         function handleLogin() { localStorage.setItem('isLoggedIn', 'true'); location.reload(); }
         function handleLogout() { localStorage.removeItem('isLoggedIn'); location.reload(); }
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        window.onload = function() {
+        window.onload = () => {
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 document.getElementById('authButtonsContainer').style.display = 'none';
                 document.getElementById('profileBtn').classList.add('show');
