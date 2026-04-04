@@ -40,23 +40,29 @@
             padding: 20px;
         }
 
-        /* --- RESPONSIVE HEADER --- */
+        /* --- UPDATED HEADER LAYOUT --- */
         header {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
             padding: 30px 40px;
             background-color: var(--header-bg);
             border-radius: 24px;
             margin-bottom: 30px;
             border: 2px dashed #eaddcf;
             gap: 20px;
-            text-align: center;
+            position: relative;
         }
 
-        .header-content { 
-            flex: 1; 
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .brand-section {
+            flex: 1;
         }
 
         h1 {
@@ -64,34 +70,39 @@
             font-size: clamp(1.8rem, 5vw, 2.8rem);
             margin: 0;
             font-weight: 800;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .tagline {
             color: #a69080;
             font-style: italic;
             font-size: 1.1em;
-            margin: 5px 0 10px 0;
+            margin: 5px 0 0 0;
         }
 
         .intro-paragraph {
-            max-width: 700px;
-            margin: 15px auto 0 auto;
+            max-width: 750px;
+            margin-top: 15px;
             color: var(--text);
             font-size: 1rem;
             opacity: 0.9;
         }
 
+        /* --- AUTH CONTROLS --- */
         .auth-controls {
             display: flex;
-            gap: 15px;
-            justify-content: center;
             align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        #authButtonsContainer {
+            display: flex;
+            gap: 10px;
         }
 
         .profile-container {
-            display: none;
-            flex-direction: row;
+            display: none; /* Controlled by JS */
             align-items: center;
             gap: 15px;
         }
@@ -99,8 +110,8 @@
         .profile-container.show { display: flex; }
 
         .profile-img {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             border: 3px solid white;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -109,17 +120,12 @@
             object-fit: cover;
         }
 
-        .profile-img:hover { transform: scale(1.1) rotate(5deg); }
+        .profile-img:hover { transform: scale(1.1); }
 
-        @media (min-width: 768px) {
-            header { 
-                flex-direction: row; 
-                text-align: left; 
-            }
-            .intro-paragraph {
-                margin: 15px 0 0 0;
-            }
-            .auth-controls { justify-content: flex-end; }
+        @media (max-width: 768px) {
+            .header-top { flex-direction: column; align-items: center; text-align: center; }
+            .auth-controls { margin-top: 10px; }
+            .intro-paragraph { text-align: center; margin: 15px auto 0 auto; }
         }
 
         /* --- DASHBOARD WITH SIDEBAR --- */
@@ -131,11 +137,11 @@
 
         @media (min-width: 992px) {
             .main-layout {
-                grid-template-columns: 200px 1fr; /* Sidebar width */
+                grid-template-columns: 200px 1fr;
             }
         }
 
-        /* --- SIDEBAR BUTTONS --- */
+        /* --- SIDEBAR (ALWAYS VISIBLE) --- */
         .sidebar {
             display: flex;
             flex-direction: row;
@@ -174,7 +180,7 @@
 
         .side-btn:hover {
             background-color: var(--header-bg);
-            transform: translateX(5px);
+            transform: translateY(-3px);
             border-color: var(--accent);
         }
 
@@ -187,7 +193,6 @@
         .side-btn.donate:hover {
             background-color: var(--danger);
             color: white;
-            transform: translateX(5px);
         }
 
         /* --- BUTTONS --- */
@@ -195,18 +200,26 @@
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s;
             box-shadow: 0 4px 0px var(--primary-dark);
             white-space: nowrap;
         }
 
         button:hover { transform: translateY(-2px); background-color: var(--primary-light); box-shadow: 0 6px 0px var(--primary-dark); }
         button:active { transform: translateY(2px); box-shadow: 0 0px 0px var(--primary-dark); }
+
+        .outline-btn {
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            box-shadow: none;
+        }
+        .outline-btn:hover { background-color: var(--accent); color: white; box-shadow: none; }
 
         .logout-btn { background-color: var(--danger); box-shadow: 0 3px 0px #c96a50; padding: 8px 16px; font-size: 13px; }
 
@@ -219,14 +232,14 @@
 
         .features-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
         .feature-card-btn {
             width: 100%;
-            padding: 20px;
-            font-size: 17px;
+            padding: 18px;
+            font-size: 16px;
             background-color: white;
             color: var(--text);
             border: 1px solid #f0e6d8;
@@ -241,7 +254,6 @@
         .feature-card-btn:hover {
             background-color: var(--primary);
             color: white;
-            box-shadow: 0 6px 15px rgba(163, 177, 138, 0.4);
             transform: translateY(-3px);
         }
 
@@ -259,7 +271,6 @@
             }
         }
 
-        /* --- MOOD TRACKER --- */
         .mood-tracker {
             background: #fdf0d5; 
             border-radius: 25px;
@@ -269,7 +280,6 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            height: 100%;
         }
 
         .mood-options {
@@ -282,9 +292,9 @@
         .mood-btn {
             font-size: 26px;
             background: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 18px;
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -293,47 +303,12 @@
         }
 
         #moodMotivation {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: #8c7851;
             font-style: italic;
-            min-height: 3em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 15px;
             background: rgba(255,255,255,0.5);
             border-radius: 15px;
-        }
-
-        .stats-panel {
-            margin-top: auto;
-            padding-top: 20px;
-            border-top: 1px solid rgba(140, 120, 81, 0.2);
-            text-align: left;
-        }
-
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            font-size: 0.85rem;
-        }
-
-        .stat-bar-bg {
-            flex: 1;
-            height: 8px;
-            background: #eee;
-            border-radius: 10px;
-            margin: 0 15px;
-            overflow: hidden;
-        }
-
-        .stat-bar-fill {
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 0.5s ease;
         }
 
         /* --- HABIT PLANNER --- */
@@ -348,121 +323,64 @@
         }
 
         @media (min-width: 768px) {
-            .planner-card {
-                flex-direction: row;
-            }
+            .planner-card { flex-direction: row; }
         }
 
-        .planner-image-container {
-            flex: 0 0 35%;
-            background: #faf7f2;
-        }
-
-        .planner-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .planner-content {
-            flex: 1;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-        }
+        .planner-image-container { flex: 0 0 35%; background: #faf7f2; }
+        .planner-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .planner-content { flex: 1; padding: 30px; display: flex; flex-direction: column; }
 
         .habit-checklist-wrapper {
             background: #faf7f2;
-            padding: 25px;
+            padding: 20px;
             border-radius: 20px;
             border: 2px solid #f3e9dc;
-            flex: 1;
         }
 
-        .habit-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-        }
-
+        .habit-list { list-style: none; padding: 0; margin: 15px 0; }
         .habit-item {
             display: flex;
             align-items: center;
             background: white;
-            padding: 12px 18px;
-            border-radius: 15px;
-            margin-bottom: 12px;
-            transition: transform 0.2s;
+            padding: 10px 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
             border-left: 5px solid var(--primary);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
+        .habit-item input { margin-right: 12px; width: 18px; height: 18px; accent-color: var(--primary); }
+        .habit-item.completed span { text-decoration: line-through; color: #b5c49c; }
 
-        .habit-item input[type="checkbox"] {
-            margin-right: 15px;
-            width: 22px;
-            height: 22px;
-            cursor: pointer;
-            accent-color: var(--primary);
-        }
-
-        .habit-item span {
-            flex: 1;
-            font-weight: 600;
-            color: var(--text);
-        }
-
-        .habit-item.completed span {
-            text-decoration: line-through;
-            color: #b5c49c;
-        }
-
-        .add-habit-form {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .add-habit-form input {
-            flex: 1;
-            padding: 14px 18px;
-            border: 2px solid #eee;
-            border-radius: 15px;
-            font-family: inherit;
-        }
-
-        .add-habit-btn {
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
+        .add-habit-form { display: flex; gap: 10px; margin-top: 15px; }
+        .add-habit-form input { flex: 1; padding: 12px; border: 2px solid #eee; border-radius: 12px; }
 
         /* --- MODALS --- */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             background: rgba(93, 87, 79, 0.6);
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
             background: #fff;
-            margin: 10vh auto;
-            padding: 40px;
+            margin: 15vh auto;
+            padding: 30px;
             width: 90%;
             max-width: 400px;
-            border-radius: 30px;
-            border: 6px solid var(--header-bg);
+            border-radius: 25px;
+            border: 5px solid var(--header-bg);
+            position: relative;
         }
+        
+        .modal-content h3 { margin-top: 0; color: var(--accent); }
+        .modal-content label { display: block; margin-top: 15px; font-weight: bold; font-size: 0.9rem; }
+        .modal-content input { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 10px; }
+        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; color: #999; }
 
     </style>
 </head>
@@ -470,30 +388,35 @@
     <div class="container">
         <!-- HEADER -->
         <header>
-            <div class="header-content">
-                <h1>Connect Space</h1>
-                <p class="tagline">⋆ 𐙚 ̊Your pathway to wellness˚˖𓍢ִ໋❀</p>
-                <p class="intro-paragraph">
-                    Dedicated to empowering wellness worldwide through shared experiences, supportive connections, and mindful daily habits. We believe in creating a safe harbor for your mental and physical glow-up. 🌿
-                </p>
-            </div>
-
-            <div class="auth-controls">
-                <div class="auth-buttons" id="authButtonsContainer">
-                    <button onclick="openModal('signinModal')">Sign In</button>
-                    <button onclick="openModal('signupModal')">Sign Up</button>
+            <div class="header-top">
+                <div class="brand-section">
+                    <h1>Connect Space</h1>
+                    <p class="tagline">⋆ 𐙚 ̊Your pathway to wellness˚˖𓍢ִ໋❀</p>
                 </div>
 
-                <div class="profile-container" id="profileBtn">
-                    <button class="logout-btn" onclick="handleLogout()">Log Out</button>
-                    <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" 
-                         alt="Profile" class="profile-img" onclick="window.location.href='profile.html'">
+                <div class="auth-controls">
+                    <!-- Shown when Logged Out -->
+                    <div id="authButtonsContainer">
+                        <button class="outline-btn" onclick="openModal('signinModal')">Sign In</button>
+                        <button onclick="openModal('signupModal')">Sign Up</button>
+                    </div>
+
+                    <!-- Shown when Logged In -->
+                    <div class="profile-container" id="profileBtn">
+                        <button class="logout-btn" onclick="handleLogout()">Log Out</button>
+                        <img src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/107/posts/109117/image-upload/24_Totoro_ellipse_nails.jpg" 
+                             alt="Profile" class="profile-img" onclick="window.location.href='profile.html'">
+                    </div>
                 </div>
             </div>
+            
+            <p class="intro-paragraph">
+                Dedicated to empowering wellness worldwide through shared experiences, supportive connections, and mindful daily habits. We believe in creating a safe harbor for your mental and physical glow-up. 🌿
+            </p>
         </header>
 
         <div class="main-layout">
-            <!-- SIDEBAR -->
+            <!-- SIDEBAR (Always Available) -->
             <aside class="sidebar">
                 <div class="side-btn" onclick="window.location.href='about.html'">
                     <span style="font-size: 1.5rem;">🏠</span>
@@ -507,16 +430,13 @@
 
             <!-- DASHBOARD CONTENT -->
             <div class="dashboard-content">
-                <!-- TOP FEATURES ROW -->
                 <div class="features-row">
                     <button class="feature-card-btn" onclick="window.location.href='story.html'">📝 Share Story</button>
                     <button class="feature-card-btn" onclick="window.location.href='articles.html'">📚 Articles</button>
                     <button class="feature-card-btn" onclick="window.location.href='community.html'">🫂 Community</button>
                 </div>
 
-                <!-- MAIN CONTENT PANELS -->
                 <div class="main-panels">
-                    
                     <!-- MOOD TRACKER -->
                     <div class="mood-tracker">
                         <h3 style="margin:0; color: var(--accent);">How are you, Bestie?</h3>
@@ -526,12 +446,11 @@
                             <button class="mood-btn" onclick="updateMood('sad')">😔</button>
                             <button class="mood-btn" onclick="updateMood('stressed')">😤</button>
                         </div>
-                        
                         <div id="moodResult" style="font-weight:800; color:#bc6c25; min-height: 1.5em; margin-top: 10px;">Tap an emoji!</div>
                         <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me! 🌸</div>
-
-                        <div class="stats-panel">
-                            <strong style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent);">Weekly Vibe Stats</strong>
+                        
+                        <div class="stats-panel" style="text-align: left; margin-top: 10px; border-top: 1px solid #eaddcf; padding-top: 15px;">
+                            <strong style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent);">Weekly Vibe Stats</strong>
                             <div id="statsContainer"></div>
                         </div>
                     </div>
@@ -541,25 +460,14 @@
                         <div class="planner-image-container">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwHdG9pWo-k3yugKlmKj4VInwxdD18qGxVlw&s" class="planner-img" alt="Planner">
                         </div>
-                        
                         <div class="planner-content">
-                            <h2 style="color: var(--accent); margin: 0 0 20px 0;">Daily Glow-Up ✨</h2>
-                            
+                            <h2 style="color: var(--accent); margin: 0 0 15px 0;">Daily Glow-Up ✨</h2>
                             <div class="habit-checklist-wrapper">
-                                <h4 style="margin: 0 0 5px 0;">My Checklist</h4>
-                                
-                                <ul class="habit-list" id="habitList">
-                                    <!-- Habits injected here -->
-                                </ul>
-
+                                <ul class="habit-list" id="habitList"></ul>
                                 <form class="add-habit-form" onsubmit="handleAddHabit(event)">
-                                    <input type="text" id="habitInput" placeholder="New goal..." maxlength="30" required>
-                                    <button type="submit" class="add-habit-btn">+</button>
+                                    <input type="text" id="habitInput" placeholder="Add a goal..." required>
+                                    <button type="submit" style="padding: 10px 15px;">+</button>
                                 </form>
-                                
-                                <div style="margin-top:20px;">
-                                    <button style="font-size: 14px; width: 100%;" onclick="setReminders()">🔔 Set Reminders</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -568,20 +476,50 @@
         </div>
     </div>
 
-    <!-- Modals -->
-    <div id="signinModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signinModal')">&times;</span><h3>Welcome Back! ☁️</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Let's Go!</button></form></div></div>
+    <!-- MODALS -->
+    <div id="signinModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('signinModal')">&times;</span>
+            <h3>Welcome Back! ☁️</h3>
+            <form onsubmit="event.preventDefault(); handleLogin();">
+                <label>Email</label><input type="email" required>
+                <label>Password</label><input type="password" required>
+                <button type="submit" style="width:100%; margin-top: 20px;">Let's Go!</button>
+            </form>
+        </div>
+    </div>
     
-    <div id="signupModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signupModal')">&times;</span><h3>Join the Club! 🌸</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Username</label><input type="text" required><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Create Account</button></form></div></div>
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
+            <h3>Join the Club! 🌸</h3>
+            <form onsubmit="event.preventDefault(); handleLogin();">
+                <label>Username</label><input type="text" required>
+                <label>Email</label><input type="email" required>
+                <label>Password</label><input type="password" required>
+                <button type="submit" style="width:100%; margin-top: 20px;">Create Account</button>
+            </form>
+        </div>
+    </div>
 
-    <div id="donateModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('donateModal')">&times;</span><h3 style="color: var(--danger);">Support Our Mission 💝</h3><p>Your contributions help us keep Connect Space free and accessible for everyone seeking wellness.</p><div style="display: flex; gap: 10px; margin-top: 20px;"><button style="flex: 1;">$5</button><button style="flex: 1;">$10</button><button style="flex: 1; background-color: var(--accent);">Custom</button></div></div></div>
+    <div id="donateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('donateModal')">&times;</span>
+            <h3 style="color: var(--danger);">Support Our Mission 💝</h3>
+            <p>Your contributions help us keep Connect Space free and accessible for everyone.</p>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button style="flex: 1;">$5</button><button style="flex: 1;">$10</button><button style="flex: 1; background-color: var(--accent);">Custom</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // MOOD LOGIC
         const moodInfo = {
-            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! Your smile is contagious, bestie. ✨", color: "#ffc300" },
-            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. Finding peace in the middle is a superpower. ☁️", color: "#a3b18a" },
-            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. It's okay to not be okay. Rest your heart. 🌸", color: "#4a90e2" },
-            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. You've handled 100% of your bad days so far. You got this! 🌿", color: "#e07a5f" }
+            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! ✨", color: "#ffc300" },
+            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. ☁️", color: "#a3b18a" },
+            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. 🌸", color: "#4a90e2" },
+            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. 🌿", color: "#e07a5f" }
         };
 
         let moodStats = JSON.parse(localStorage.getItem('moodStats')) || { happy: 0, neutral: 0, sad: 0, stressed: 0 };
@@ -602,10 +540,12 @@
                 const count = moodStats[key];
                 const percent = Math.round((count / total) * 100);
                 return `
-                    <div class="stat-row">
-                        <span>${info.emoji}</span>
-                        <div class="stat-bar-bg"><div class="stat-bar-fill" style="width: ${percent}%; background: ${info.color}"></div></div>
-                        <span style="font-weight:800; color: var(--accent);">${percent}%</span>
+                    <div style="display: flex; align-items: center; margin-top: 8px; font-size: 0.85rem;">
+                        <span style="width: 25px;">${info.emoji}</span>
+                        <div style="flex: 1; height: 6px; background: #eee; border-radius: 10px; margin: 0 10px; overflow: hidden;">
+                            <div style="height: 100%; background: ${info.color}; width: ${percent}%;"></div>
+                        </div>
+                        <span style="width: 35px; font-weight: bold;">${percent}%</span>
                     </div>
                 `;
             }).join('');
@@ -614,8 +554,7 @@
         // HABIT LOGIC
         let habits = JSON.parse(localStorage.getItem('habits')) || [
             { text: "Drink water 💧", completed: false },
-            { text: "Stretch 🌸", completed: false },
-            { text: "Meditate 🧘", completed: false }
+            { text: "Stretch 🌸", completed: false }
         ];
 
         function handleAddHabit(e) {
@@ -648,17 +587,15 @@
             `).join('');
         }
 
-        function setReminders() {
-            const msg = document.createElement('div');
-            msg.style = "position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; font-weight: bold;";
-            msg.textContent = "Reminders set for your glow-up! 🌿";
-            document.body.appendChild(msg);
-            setTimeout(() => msg.remove(), 2500);
-        }
-
         // AUTH & INIT
-        function handleLogin() { localStorage.setItem('isLoggedIn', 'true'); location.reload(); }
-        function handleLogout() { localStorage.removeItem('isLoggedIn'); location.reload(); }
+        function handleLogin() { 
+            localStorage.setItem('isLoggedIn', 'true'); 
+            location.reload(); 
+        }
+        function handleLogout() { 
+            localStorage.removeItem('isLoggedIn'); 
+            location.reload(); 
+        }
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
