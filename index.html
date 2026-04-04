@@ -496,11 +496,11 @@
             <!-- SIDEBAR -->
             <aside class="sidebar">
                 <div class="side-btn" onclick="window.location.href='about.html'">
-                    <span style="font-size: 1.5rem;"></span>
+                    <span style="font-size: 1.5rem;">🏠</span>
                     <span>About Us</span>
                 </div>
                 <div class="side-btn donate" onclick="openModal('donateModal')">
-                    <span style="font-size: 1.5rem;"></span>
+                    <span style="font-size: 1.5rem;">💝</span>
                     <span>Donate</span>
                 </div>
             </aside>
@@ -528,7 +528,7 @@
                         </div>
                         
                         <div id="moodResult" style="font-weight:800; color:#bc6c25; min-height: 1.5em; margin-top: 10px;">Tap an emoji!</div>
-                        <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me!</div>
+                        <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me! 🌸</div>
 
                         <div class="stats-panel">
                             <strong style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent);">Weekly Vibe Stats</strong>
@@ -543,7 +543,7 @@
                         </div>
                         
                         <div class="planner-content">
-                            <h2 style="color: var(--accent); margin: 0 0 20px 0;">Daily Glow-Up</h2>
+                            <h2 style="color: var(--accent); margin: 0 0 20px 0;">Daily Glow-Up ✨</h2>
                             
                             <div class="habit-checklist-wrapper">
                                 <h4 style="margin: 0 0 5px 0;">My Checklist</h4>
@@ -569,19 +569,19 @@
     </div>
 
     <!-- Modals -->
-    <div id="signinModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signinModal')">&times;</span><h3>Welcome Back! </h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Let's Go!</button></form></div></div>
+    <div id="signinModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signinModal')">&times;</span><h3>Welcome Back! ☁️</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Let's Go!</button></form></div></div>
     
-    <div id="signupModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signupModal')">&times;</span><h3>Join the Club! </h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Username</label><input type="text" required><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Create Account</button></form></div></div>
+    <div id="signupModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('signupModal')">&times;</span><h3>Join the Club! 🌸</h3><form onsubmit="event.preventDefault(); handleLogin();"><label>Username</label><input type="text" required><label>Email</label><input type="email" required><label>Password</label><input type="password" required><button type="submit" style="width:100%;">Create Account</button></form></div></div>
 
     <div id="donateModal" class="modal"><div class="modal-content"><span style="float:right; cursor:pointer;" onclick="closeModal('donateModal')">&times;</span><h3 style="color: var(--danger);">Support Our Mission 💝</h3><p>Your contributions help us keep Connect Space free and accessible for everyone seeking wellness.</p><div style="display: flex; gap: 10px; margin-top: 20px;"><button style="flex: 1;">$5</button><button style="flex: 1;">$10</button><button style="flex: 1; background-color: var(--accent);">Custom</button></div></div></div>
 
     <script>
         // MOOD LOGIC
         const moodInfo = {
-            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! Your smile is contagious, bestie. ", color: "#ffc300" },
-            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. Finding peace in the middle is a superpower. ", color: "#a3b18a" },
-            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. It's okay to not be okay. Rest your heart. ", color: "#4a90e2" },
-            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. You've handled 100% of your bad days so far. You got this! ", color: "#e07a5f" }
+            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! Your smile is contagious, bestie. ✨", color: "#ffc300" },
+            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. Finding peace in the middle is a superpower. ☁️", color: "#a3b18a" },
+            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. It's okay to not be okay. Rest your heart. 🌸", color: "#4a90e2" },
+            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. You've handled 100% of your bad days so far. You got this! 🌿", color: "#e07a5f" }
         };
 
         let moodStats = JSON.parse(localStorage.getItem('moodStats')) || { happy: 0, neutral: 0, sad: 0, stressed: 0 };
@@ -613,9 +613,9 @@
 
         // HABIT LOGIC
         let habits = JSON.parse(localStorage.getItem('habits')) || [
-            { text: "Drink water ", completed: false },
-            { text: "Stretch ", completed: false },
-            { text: "Meditate ", completed: false }
+            { text: "Drink water 💧", completed: false },
+            { text: "Stretch 🌸", completed: false },
+            { text: "Meditate 🧘", completed: false }
         ];
 
         function handleAddHabit(e) {
@@ -651,7 +651,7 @@
         function setReminders() {
             const msg = document.createElement('div');
             msg.style = "position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 12px 24px; border-radius: 50px; z-index: 2000; font-weight: bold;";
-            msg.textContent = "Reminders set for your glow-up!";
+            msg.textContent = "Reminders set for your glow-up! 🌿";
             document.body.appendChild(msg);
             setTimeout(() => msg.remove(), 2500);
         }
