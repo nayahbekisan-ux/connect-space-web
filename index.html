@@ -411,7 +411,7 @@
             </div>
             
             <p class="intro-paragraph">
-                Dedicated to empowering wellness worldwide through shared experiences, supportive connections, and mindful daily habits. We believe in creating a safe harbor for your mental and physical glow-up. 🌿
+                Dedicated to empowering wellness worldwide through shared experiences, supportive connections, and mindful daily habits. We believe in creating a safe harbor for your mental and physical glow-up.
             </p>
         </header>
 
@@ -419,11 +419,11 @@
             <!-- SIDEBAR (Always Available) -->
             <aside class="sidebar">
                 <div class="side-btn" onclick="window.location.href='about.html'">
-                    <span style="font-size: 1.5rem;">🏠</span>
+                    <span style="font-size: 1.5rem;"></span>
                     <span>About Us</span>
                 </div>
                 <div class="side-btn donate" onclick="openModal('donateModal')">
-                    <span style="font-size: 1.5rem;">💝</span>
+                    <span style="font-size: 1.5rem;"></span>
                     <span>Donate</span>
                 </div>
             </aside>
@@ -431,9 +431,9 @@
             <!-- DASHBOARD CONTENT -->
             <div class="dashboard-content">
                 <div class="features-row">
-                    <button class="feature-card-btn" onclick="window.location.href='story.html'">📝 Share Story</button>
-                    <button class="feature-card-btn" onclick="window.location.href='articles.html'">📚 Articles</button>
-                    <button class="feature-card-btn" onclick="window.location.href='community.html'">🫂 Community</button>
+                    <button class="feature-card-btn" onclick="window.location.href='story.html'"> Share Story</button>
+                    <button class="feature-card-btn" onclick="window.location.href='articles.html'"> Articles</button>
+                    <button class="feature-card-btn" onclick="window.location.href='community.html'"> Community</button>
                 </div>
 
                 <div class="main-panels">
@@ -447,7 +447,7 @@
                             <button class="mood-btn" onclick="updateMood('stressed')">😤</button>
                         </div>
                         <div id="moodResult" style="font-weight:800; color:#bc6c25; min-height: 1.5em; margin-top: 10px;">Tap an emoji!</div>
-                        <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me! 🌸</div>
+                        <div id="moodMotivation">Your energy matters. Pick how you feel to see a little note from me! </div>
                         
                         <div class="stats-panel" style="text-align: left; margin-top: 10px; border-top: 1px solid #eaddcf; padding-top: 15px;">
                             <strong style="font-size: 0.8rem; text-transform: uppercase; color: var(--accent);">Weekly Vibe Stats</strong>
@@ -458,10 +458,10 @@
                     <!-- HABIT PLANNER -->
                     <div class="planner-card">
                         <div class="planner-image-container">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwHdG9pWo-k3yugKlmKj4VInwxdD18qGxVlw&s" class="planner-img" alt="Planner">
+                            <img src="https://www.vecteezy.com/photo/69859741-a-desk-with-a-keyboard-mouse-and-other-office-supplies" class="planner-img" alt="Planner">
                         </div>
                         <div class="planner-content">
-                            <h2 style="color: var(--accent); margin: 0 0 15px 0;">Daily Glow-Up ✨</h2>
+                            <h2 style="color: var(--accent); margin: 0 0 15px 0;">Daily Glow-Up </h2>
                             <div class="habit-checklist-wrapper">
                                 <ul class="habit-list" id="habitList"></ul>
                                 <form class="add-habit-form" onsubmit="handleAddHabit(event)">
@@ -480,7 +480,7 @@
     <div id="signinModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('signinModal')">&times;</span>
-            <h3>Welcome Back! ☁️</h3>
+            <h3>Welcome Back! </h3>
             <form onsubmit="event.preventDefault(); handleLogin();">
                 <label>Email</label><input type="email" required>
                 <label>Password</label><input type="password" required>
@@ -492,7 +492,7 @@
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('signupModal')">&times;</span>
-            <h3>Join the Club! 🌸</h3>
+            <h3>Join the Club</h3>
             <form onsubmit="event.preventDefault(); handleLogin();">
                 <label>Username</label><input type="text" required>
                 <label>Email</label><input type="email" required>
@@ -516,10 +516,10 @@
     <script>
         // MOOD LOGIC
         const moodInfo = {
-            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! ✨", color: "#ffc300" },
-            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. ☁️", color: "#a3b18a" },
-            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. 🌸", color: "#4a90e2" },
-            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. 🌿", color: "#e07a5f" }
+            happy: { label: "Happy", emoji: "😊", note: "Keep that sunshine glowing! ", color: "#ffc300" },
+            neutral: { label: "Neutral", emoji: "😐", note: "It's okay to just exist today. ", color: "#a3b18a" },
+            sad: { label: "Sad", emoji: "😔", note: "Sending you the biggest virtual hug. ", color: "#4a90e2" },
+            stressed: { label: "Stressed", emoji: "😤", note: "Breathe in... breathe out. ", color: "#e07a5f" }
         };
 
         let moodStats = JSON.parse(localStorage.getItem('moodStats')) || { happy: 0, neutral: 0, sad: 0, stressed: 0 };
@@ -553,8 +553,8 @@
 
         // HABIT LOGIC
         let habits = JSON.parse(localStorage.getItem('habits')) || [
-            { text: "Drink water 💧", completed: false },
-            { text: "Stretch 🌸", completed: false }
+            { text: "Drink water ", completed: false },
+            { text: "Stretch ", completed: false }
         ];
 
         function handleAddHabit(e) {
